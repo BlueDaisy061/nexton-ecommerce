@@ -2,4 +2,7 @@
     "files.autoSave": "afterDelay",
     "editor.formatOnSave": true,
     "prettier.semi": true,
+    "cSpell.words": [
+        "nexton"
+    ],
 }
