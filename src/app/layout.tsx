@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NavLinks } from './ui/navlinks';
+import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
+import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/16/solid';
 
 export default function RootLayout({
   children,
@@ -17,7 +19,8 @@ export default function RootLayout({
   const isLoggedIn = true;
   const pathname = usePathname();
   const numberOfProducts = 3;
-  const [menuIsOpen, setMenuIsOpen] = useState<Boolean>();
+  const [menuIsOpen, setMenuIsOpen] = useState<Boolean>(false);
+  const [userBoxIsOpen, setUserBoxIsOpen] = useState<Boolean>(false);
 
   const openMenu = () => {
     setMenuIsOpen(true);
@@ -26,6 +29,12 @@ export default function RootLayout({
   const closeMenu = () => {
     setMenuIsOpen(false);
   };
+
+  const toggleUserBox = () => {
+    userBoxIsOpen ? setUserBoxIsOpen(false) : setUserBoxIsOpen(true);
+    console.log('userBox: ', userBoxIsOpen);
+  };
+
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
@@ -60,13 +69,46 @@ export default function RootLayout({
             {isLoggedIn ? (
               <div className="hidden md:w-[80px] md:flex md:justify-between">
                 <>
-                  <Image src="user-icon.svg" alt="user-icon" width={24} height={24} />
                   <div className="relative">
+                    <Menu>
+                      <MenuButton>
+                        <Image
+                          src="user-icon.svg"
+                          alt="user-icon"
+                          width={24}
+                          height={24}
+                          onClick={toggleUserBox}
+                        />
+                      </MenuButton>
+                      <Transition
+                        enter="transition ease-out duration-75"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95"
+                      >
+                        <MenuItems className="w-32 rounded-xl absolute right-[-24px] top-10 border border-primary bg-white p-1 text-sm text-body-text">
+                          <MenuItem>
+                            <Link
+                              href={'/login'}
+                              className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
+                            >
+                              <ArrowRightStartOnRectangleIcon className="size-4 fill-white/30" />
+                              Log out
+                            </Link>
+                          </MenuItem>
+                        </MenuItems>
+                      </Transition>
+                    </Menu>
+                  </div>
+
+                  <Link href={'/checkout'} className="relative">
                     <Image src="cart-icon.svg" alt="cart-icon" width={24} height={24} />
                     <div className="rounded-full bg-vibrant w-5 h-5 text-xs text-default text-center leading-5 absolute -top-3 -right-2">
                       {numberOfProducts}
                     </div>
-                  </div>
+                  </Link>
                 </>
               </div>
             ) : (
