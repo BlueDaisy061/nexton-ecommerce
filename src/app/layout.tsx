@@ -20,7 +20,6 @@ export default function RootLayout({
   const pathname = usePathname();
   const numberOfProducts = 3;
   const [menuIsOpen, setMenuIsOpen] = useState<Boolean>(false);
-  const [userBoxIsOpen, setUserBoxIsOpen] = useState<Boolean>(false);
 
   const openMenu = () => {
     setMenuIsOpen(true);
@@ -28,11 +27,6 @@ export default function RootLayout({
 
   const closeMenu = () => {
     setMenuIsOpen(false);
-  };
-
-  const toggleUserBox = () => {
-    userBoxIsOpen ? setUserBoxIsOpen(false) : setUserBoxIsOpen(true);
-    console.log('userBox: ', userBoxIsOpen);
   };
 
   return (
@@ -72,13 +66,7 @@ export default function RootLayout({
                   <div className="relative">
                     <Menu>
                       <MenuButton>
-                        <Image
-                          src="user-icon.svg"
-                          alt="user-icon"
-                          width={24}
-                          height={24}
-                          onClick={toggleUserBox}
-                        />
+                        <Image src="user-icon.svg" alt="user-icon" width={24} height={24} />
                       </MenuButton>
                       <Transition
                         enter="transition ease-out duration-75"
