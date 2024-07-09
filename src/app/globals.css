@@ -22,19 +22,19 @@ body {
 
 @layer base {
   h1 {
-    @apply text-3xl font-medium text-primary leading-[38px] lg:text-[64px] lg:leading-[72px];
+    @apply text-3xl font-medium text-primary-color leading-[38px] lg:text-[64px] lg:leading-[72px];
   }
   h2 {
-    @apply text-2xl font-medium text-primary leading-8 lg:text-4xl lg:leading-10;
+    @apply text-2xl font-medium text-primary-color leading-8 lg:text-4xl lg:leading-10;
   }
   h3 {
-    @apply text-xl font-medium text-primary leading-7 lg:text-2xl lg:leading-8;
+    @apply text-xl font-medium text-primary-color leading-7 lg:text-2xl lg:leading-8;
   }
   h4 {
-    @apply text-base font-medium text-primary leading-6 lg:text-lg lg:leading-7;
+    @apply text-base font-medium text-primary-color leading-6 lg:text-lg lg:leading-7;
   }
   h5 {
-    @apply text-sm font-medium text-primary leading-5 lg:text-base lg:leading-6;
+    @apply text-sm font-medium text-primary-color leading-5 lg:text-base lg:leading-6;
   }
   p {
     @apply text-sm font-light leading-5 text-body-text lg:text-base lg:leading-6;
