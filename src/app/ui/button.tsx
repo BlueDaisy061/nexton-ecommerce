@@ -1,6 +1,18 @@
-export const PrimaryButton = ({ title }: { title: string }) => {
+export const PrimaryButton = ({
+  title,
+  leftIcon,
+  rightIcon,
+}: {
+  title: string;
+  leftIcon?: any;
+  rightIcon?: any;
+}) => {
   return (
-    <button className="rounded-full bg-primary text-sm text-default py-[10px] px-5">{title}</button>
+    <button className="rounded-full flex gap-2 items-center bg-primary-color text-sm text-default py-[10px] px-5">
+      {leftIcon}
+      {title}
+      {rightIcon}
+    </button>
   );
 };
 

@@ -8,8 +8,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NavLinks } from './ui/navlinks';
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react';
-import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/16/solid';
 
 export default function RootLayout({
   children,
@@ -32,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 md:px-[80px] md:py-7">
+        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 md:px-[80px] md:py-4">
           <Image
             src="logo.svg"
             alt="nexton-logo"
@@ -61,39 +59,33 @@ export default function RootLayout({
           </div>
           <div>
             {isLoggedIn ? (
-              <div className="hidden md:w-[80px] md:flex md:justify-between">
+              <div className="hidden md:w-[80px] md:flex md:items-center">
                 <>
-                  <div className="relative">
-                    <Menu>
-                      <MenuButton>
+                  <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                      <div>
                         <Image src="user-icon.svg" alt="user-icon" width={24} height={24} />
-                      </MenuButton>
-                      <Transition
-                        enter="transition ease-out duration-75"
-                        enterFrom="opacity-0 scale-95"
-                        enterTo="opacity-100 scale-100"
-                        leave="transition ease-in duration-100"
-                        leaveFrom="opacity-100 scale-100"
-                        leaveTo="opacity-0 scale-95"
-                      >
-                        <MenuItems className="w-32 rounded-xl absolute right-[-24px] top-10 border border-primary bg-white p-1 text-sm text-body-text">
-                          <MenuItem>
-                            <Link
-                              href={'/login'}
-                              className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
-                            >
-                              <ArrowRightStartOnRectangleIcon className="size-4 fill-white/30" />
-                              Log out
-                            </Link>
-                          </MenuItem>
-                        </MenuItems>
-                      </Transition>
-                    </Menu>
+                      </div>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu menu-sm dropdown-content bg-default rounded-box z-[1] mt-3 w-48 p-2 shadow"
+                    >
+                      <li>
+                        <Link href={'/login'}>Logout</Link>
+                      </li>
+                    </ul>
                   </div>
 
                   <Link href={'/checkout'} className="relative">
-                    <Image src="cart-icon.svg" alt="cart-icon" width={24} height={24} />
-                    <div className="rounded-full bg-vibrant w-5 h-5 text-xs text-default text-center leading-5 absolute -top-3 -right-2">
+                    <Image
+                      src="cart-icon.svg"
+                      alt="cart-icon"
+                      width={24}
+                      height={24}
+                      className="ml-[1vw]"
+                    />
+                    <div className="rounded-full bg-vibrant w-5 h-5 text-xs text-default text-center leading-5 absolute -top-3 -right-4">
                       {numberOfProducts}
                     </div>
                   </Link>
@@ -124,7 +116,7 @@ export default function RootLayout({
         </header>
         {menuIsOpen && (
           <nav
-            className="bg-gray z-50 block w-auto h-auto absolute top-20 bottom-0 right-0 left-0"
+            className="bg-gray z-50 block w-auto h-auto fixed top-20 bottom-0 right-0 left-0"
             onClick={closeMenu}
           >
             <NavLinks
@@ -163,8 +155,8 @@ export default function RootLayout({
             </ul>
           </nav>
         )}
-        <div className="mt-20 md:mt-24">{children}</div>
-        <footer className="bg-default pt-6 left-0 right-0 border-t border-t-border md:absolute md:bottom-0">
+        <div>{children}</div>
+        <footer className="bg-default pt-6 left-0 right-0 border-t border-t-border">
           <div className="grid grid-cols-1 gap-[60px] px-6 py-6 md:grid-cols-4 md:px-[80px]">
             <div>
               <Image src="logo.svg" alt="Nexton-logo" width={100} height={42} className="mb-5" />
