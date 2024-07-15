@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-import { Carousel } from './ui/carousel';
+import { CarouselWrapper } from './ui/carousel';
 
 export default function Home() {
   return (
-    <div className="pt-20">
+    <div className="pt-[4.5rem]">
       <div className="md:relative">
         <Image
           alt="Hero-bg"
@@ -13,7 +13,12 @@ export default function Home() {
           height={0}
           className="w-auto height-auto hidden md:block"
         />
-        <Carousel />
+        <CarouselWrapper />
+      </div>
+      <div>
+        <div className="md:hidden">
+          <h4>Nexton® always with you</h4>
+        </div>
       </div>
     </div>
   );

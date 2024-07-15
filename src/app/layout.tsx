@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NavLinks } from './ui/navlinks';
+import { Dropdown, MenuProps, Space } from 'antd';
 
 export default function RootLayout({
   children,
@@ -26,6 +27,13 @@ export default function RootLayout({
   const closeMenu = () => {
     setMenuIsOpen(false);
   };
+
+  const items: MenuProps['items'] = [
+    {
+      label: <Link href={'/login'}>Logout</Link>,
+      key: '0',
+    },
+  ];
 
   return (
     <html lang="en">
@@ -57,62 +65,50 @@ export default function RootLayout({
               className="w-full bg-inherit text-xs placeholder:bg-gray focus:outline-none bg-gray"
             />
           </div>
-          <div>
-            {isLoggedIn ? (
-              <div className="hidden md:w-[80px] md:flex md:items-center">
-                <>
-                  <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                      <div>
-                        <Image src="user-icon.svg" alt="user-icon" width={24} height={24} />
-                      </div>
-                    </div>
-                    <ul
-                      tabIndex={0}
-                      className="menu menu-sm dropdown-content bg-default rounded-box z-[1] mt-3 w-48 p-2 shadow"
-                    >
-                      <li>
-                        <Link href={'/login'}>Logout</Link>
-                      </li>
-                    </ul>
-                  </div>
+          {isLoggedIn ? (
+            <div className="hidden md:w-[80px] md:flex md:items-center">
+              <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space className="hover:cursor-pointer">
+                    <Image src="user-icon.svg" alt="user-icon" width={24} height={24} />
+                  </Space>
+                </a>
+              </Dropdown>
 
-                  <Link href={'/checkout'} className="relative">
-                    <Image
-                      src="cart-icon.svg"
-                      alt="cart-icon"
-                      width={24}
-                      height={24}
-                      className="ml-[1vw]"
-                    />
-                    <div className="rounded-full bg-vibrant w-5 h-5 text-xs text-default text-center leading-5 absolute -top-3 -right-4">
-                      {numberOfProducts}
-                    </div>
-                  </Link>
-                </>
-              </div>
-            ) : (
-              <div className="hidden md:w-[190px] md:flex md:justify-between">
-                <PrimaryButton title="Sign up" />
-                <SecondaryButton title="Log in" />
-              </div>
-            )}
-            {menuIsOpen ? (
-              <button className="py-1 md:hidden " onClick={closeMenu}>
+              <Link href={'/checkout'} className="relative">
                 <Image
-                  src="close-icon.svg"
-                  alt="close-icon"
-                  width={32}
-                  height={28}
-                  className="px-[9px] py-[7px]"
+                  src="cart-icon.svg"
+                  alt="cart-icon"
+                  width={24}
+                  height={24}
+                  className="ml-[1vw]"
                 />
-              </button>
-            ) : (
-              <button className="py-1 md:hidden " onClick={openMenu}>
-                <Image src="hamburger-menu.svg" alt="hamburger-menu" width={32} height={28} />
-              </button>
-            )}
-          </div>
+                <div className="rounded-full bg-vibrant w-5 h-5 text-xs text-default text-center leading-5 absolute -top-3 -right-4">
+                  {numberOfProducts}
+                </div>
+              </Link>
+            </div>
+          ) : (
+            <div className="hidden md:w-[190px] md:flex md:justify-between">
+              <PrimaryButton title="Sign up" />
+              <SecondaryButton title="Log in" />
+            </div>
+          )}
+          {menuIsOpen ? (
+            <button className="py-1 md:hidden " onClick={closeMenu}>
+              <Image
+                src="close-icon.svg"
+                alt="close-icon"
+                width={32}
+                height={28}
+                className="px-[9px] py-[7px]"
+              />
+            </button>
+          ) : (
+            <button className="py-1 md:hidden " onClick={openMenu}>
+              <Image src="hamburger-menu.svg" alt="hamburger-menu" width={32} height={28} />
+            </button>
+          )}
         </header>
         {menuIsOpen && (
           <nav
