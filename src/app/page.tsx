@@ -2,7 +2,9 @@ import Image from 'next/image';
 
 import { CarouselWrapper } from './ui/carousel';
 import { FeatureCard } from './ui/featureCard';
-import { websiteFeatures } from './lib/constants';
+import { collection, websiteFeatures } from './lib/constants';
+import { Collection } from './ui/collection';
+import { CollectionCard } from './ui/collection-card';
 
 export default function Home() {
   return (
@@ -30,6 +32,24 @@ export default function Home() {
                 title={feature.title}
                 description={feature.description}
               />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="py-12 px-6 lg:py-20 md:px-[3.5rem] lg:px-[5rem]">
+        <div className="flex mb-6 md:mb-10">
+          <h2>Start exploring.</h2>
+          <h2 className="hidden md:block md:ml-2 md:text-body-text">
+            Good things are waiting for you
+          </h2>
+        </div>
+        <div className="block md:hidden">
+          <Collection />
+        </div>
+        <div className="hidden md:block">
+          <div className="flex justify-center md:gap-3 lg:gap-5">
+            {collection.map((item, key) => (
+              <CollectionCard title={item.title} description={item.description} key={key} />
             ))}
           </div>
         </div>

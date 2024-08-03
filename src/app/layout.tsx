@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 md:px-[4rem] md:py-4 lg:px-[5rem]">
+        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 md:px-[3.5rem] md:py-4 lg:px-[4.5rem]">
           <Image
             src="logo.svg"
             alt="nexton-logo"
@@ -153,7 +153,7 @@ export default function RootLayout({
         )}
         <div>{children}</div>
         <footer className="bg-default pt-6 left-0 right-0 border-t border-t-border">
-          <div className="grid grid-cols-1 gap-[60px] px-6 py-6 md:grid-cols-4 md:px-[4rem] lg:px-[5rem]">
+          <div className="grid grid-cols-1 gap-[60px] px-6 py-6 md:grid-cols-4 md:px-[3.5rem] lg:px-[5rem]">
             <div>
               <Image src="logo.svg" alt="Nexton-logo" width={100} height={42} className="mb-5" />
               <div className="grid grid-cols-1 gap-3">
