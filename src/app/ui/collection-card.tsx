@@ -6,8 +6,7 @@ export const CollectionCard = ({ title, description }: { title: string; descript
     <div className="h-40 w-full rounded-lg md:h-28">
       <div className="bg-gray h-32 rounded-lg flex justify-between items-center px-6 py-10 md:h-28 md:px-5 md:py-5 lg:px-10">
         <div>
-          <h3 className="hidden lg:block">{title}</h3>
-          <h4 className="lg:hidden">{title}</h4>
+          <h4 className="block md:hidden lg:block">{title}</h4>
           <p className="sm:hidden lg:hidden font-semibold">{title}</p>
           <p>{description}</p>
         </div>

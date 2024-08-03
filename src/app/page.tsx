@@ -2,9 +2,11 @@ import Image from 'next/image';
 
 import { CarouselWrapper } from './ui/carousel';
 import { FeatureCard } from './ui/featureCard';
-import { collection, websiteFeatures } from './lib/constants';
+import { collection, products, websiteFeatures } from './lib/constants';
 import { Collection } from './ui/collection';
 import { CollectionCard } from './ui/collection-card';
+import { ProductItem } from './ui/product-item';
+import { Carousel } from 'antd';
 
 export default function Home() {
   return (
@@ -52,6 +54,48 @@ export default function Home() {
               <CollectionCard title={item.title} description={item.description} key={key} />
             ))}
           </div>
+        </div>
+      </div>
+      <div className="py-12 px-6 lg:py-20 md:px-[3.5rem] lg:px-[5rem]">
+        <div className="flex mb-6 md:mb-10">
+          <h2>Recommendation.</h2>
+          <h2 className="hidden md:block md:ml-2 md:text-body-text">
+            Best matching products for you
+          </h2>
+        </div>
+        <div className="lg:hidden">
+          <Carousel autoplay>
+            {products.map((product, key) => (
+              <ProductItem
+                key={key}
+                image={product.image}
+                isDiscount={product.isDiscount}
+                percentDiscount={product.percentDiscount}
+                productName={product.productName}
+                productCategory={product.productCategory}
+                price={product.price}
+                salePrice={product.salePrice}
+                rate={product.rate}
+                numberOfFeedbacks={product.numberOfFeedbacks}
+              />
+            ))}
+          </Carousel>
+        </div>
+        <div className="sm:hidden lg:flex lg:gap-5">
+          {products.map((product, key) => (
+            <ProductItem
+              key={key}
+              image={product.image}
+              isDiscount={product.isDiscount}
+              percentDiscount={product.percentDiscount}
+              productName={product.productName}
+              productCategory={product.productCategory}
+              price={product.price}
+              salePrice={product.salePrice}
+              rate={product.rate}
+              numberOfFeedbacks={product.numberOfFeedbacks}
+            />
+          ))}
         </div>
       </div>
     </div>
