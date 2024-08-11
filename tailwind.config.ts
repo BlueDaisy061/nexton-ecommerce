@@ -19,6 +19,7 @@ const config: Config = {
       'border': '#E5E7EB',
       'default': '#FFFFFF',
       'gray': '#F8F8F8',
+      'banner-gray': '#F5F5F5',
       'yellow': '#FBBF24'
     },
     extend: {
