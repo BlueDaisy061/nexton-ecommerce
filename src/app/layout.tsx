@@ -38,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 md:px-[3.5rem] md:py-4 lg:px-[4.5rem]">
+        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 drop-shadow-sm md:px-[3.5rem] md:py-4 lg:px-[4.5rem]">
           <Image
             src="logo.svg"
             alt="nexton-logo"

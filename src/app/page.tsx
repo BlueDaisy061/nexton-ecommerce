@@ -7,20 +7,22 @@ import { Collection } from './ui/collection';
 import { CollectionCard } from './ui/collection-card';
 import { ProductItem } from './ui/product-item';
 import { Carousel } from 'antd';
+import { PrimaryButton } from './ui/button';
 
 export default function Home() {
   return (
     <div className="pt-[4.5rem]">
-      <div className="md:relative">
+      <div className="w-full h-auto bg-banner-gray md:flex md:justify-between md:items-center">
         <Image
           alt="Hero-bg"
           src="/hero-bg.svg"
           width={0}
           height={0}
-          className="w-auto height-auto hidden md:block"
+          className="w-full height-auto hidden md:block"
         />
         <CarouselWrapper />
       </div>
+      {/* Company feature section */}
       <div className="py-12 px-6 md:py-12 md:mx-[2rem] lg:px-0 lg:mx-[5rem]">
         <div className="md:hidden">
           <h5>Nexton® always with you</h5>
@@ -38,6 +40,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* Collection section */}
       <div className="py-12 px-6 lg:py-20 md:px-[3.5rem] lg:px-[5rem]">
         <div className="flex mb-6 md:mb-10">
           <h2>Start exploring.</h2>
@@ -49,13 +52,14 @@ export default function Home() {
           <Collection />
         </div>
         <div className="hidden md:block">
-          <div className="flex justify-center md:gap-3 lg:gap-5">
+          <div className="flex justify-between gap-5">
             {collection.map((item, key) => (
               <CollectionCard title={item.title} description={item.description} key={key} />
             ))}
           </div>
         </div>
       </div>
+      {/* Recommendation products section */}
       <div className="py-12 px-6 lg:py-20 md:px-[3.5rem] lg:px-[5rem]">
         <div className="flex mb-6 md:mb-10">
           <h2>Recommendation.</h2>
@@ -81,7 +85,7 @@ export default function Home() {
             ))}
           </Carousel>
         </div>
-        <div className="sm:hidden lg:flex lg:gap-5">
+        <div className="sm:hidden lg:flex lg:justify-between gap-5">
           {products.map((product, key) => (
             <ProductItem
               key={key}
@@ -96,6 +100,67 @@ export default function Home() {
               numberOfFeedbacks={product.numberOfFeedbacks}
             />
           ))}
+        </div>
+      </div>
+      {/* Best sellers section */}
+      <div className="py-12 px-6 lg:py-20 md:px-[3.5rem] lg:px-[5rem]">
+        <div className="flex mb-6 md:mb-10">
+          <h2>Best Sellers.</h2>
+          <h2 className="hidden md:block md:ml-2 md:text-body-text">Best selling of the month</h2>
+        </div>
+        <div className="lg:hidden">
+          <Carousel autoplay>
+            {products.map((product, key) => (
+              <ProductItem
+                key={key}
+                image={product.image}
+                isDiscount={product.isDiscount}
+                percentDiscount={product.percentDiscount}
+                productName={product.productName}
+                productCategory={product.productCategory}
+                price={product.price}
+                salePrice={product.salePrice}
+                rate={product.rate}
+                numberOfFeedbacks={product.numberOfFeedbacks}
+              />
+            ))}
+          </Carousel>
+        </div>
+        <div className="sm:hidden lg:flex lg:justify-between gap-5">
+          {products.map((product, key) => (
+            <ProductItem
+              key={key}
+              image={product.image}
+              isDiscount={product.isDiscount}
+              percentDiscount={product.percentDiscount}
+              productName={product.productName}
+              productCategory={product.productCategory}
+              price={product.price}
+              salePrice={product.salePrice}
+              rate={product.rate}
+              numberOfFeedbacks={product.numberOfFeedbacks}
+            />
+          ))}
+        </div>
+      </div>
+      {/* Banner section */}
+      <div className="py-12 px-6 hidden md:px-[3.5rem] lg:block lg:py-20 lg:px-[5rem]">
+        <div className="w-auto h-[28rem] bg-banner-gray rounded-3xl">
+          <div className="flex justify-between">
+            <div className="py-24 px-28">
+              <h4 className="text-body-text mb-[14px]">100% Original Products</h4>
+              <h2 className="mb-6">The All New Fashion Collection Items</h2>
+              <h4 className="text-body-text mb-6">Starting from: $59.99</h4>
+              <PrimaryButton title={'Shop now'} style="drop-shadow-md" />
+            </div>
+            <Image
+              src={'/banner-bg-image.svg'}
+              alt={'banner-bg-image'}
+              width={0}
+              height={0}
+              className="w-auto h-[28rem] rounded-3xl"
+            />
+          </div>
         </div>
       </div>
     </div>
