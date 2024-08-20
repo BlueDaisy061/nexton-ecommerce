@@ -42,7 +42,7 @@ export const FilterPriceRange = () => {
         />
         <div className="flex justify-between gap-6 mt-5">
           <div>
-            <p>Min price</p>
+            <p className="mb-1">Min price</p>
             <InputNumber
               className="w-28 rounded-full"
               min={0}
@@ -52,7 +52,7 @@ export const FilterPriceRange = () => {
             />
           </div>
           <div>
-            <p>Max price</p>
+            <p className="mb-1">Max price</p>
             <InputNumber
               className="w-28 rounded-full"
               min={0}
