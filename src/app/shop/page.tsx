@@ -1,12 +1,13 @@
 'use client';
-import { Dropdown, MenuProps, Space } from 'antd';
+import { Dropdown, MenuProps, Pagination, Space } from 'antd';
 import { FilterCategories } from '../ui/filter-categories';
 import { FilterPriceRange } from '../ui/filter-price-range';
 import { FilterSort } from '../ui/filter-sort';
-import { useState } from 'react';
-import { FunnelIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/24/outline';
+import { products } from '../lib/products';
+import { ProductItem } from '../ui/product-item';
 
-const items: MenuProps['items'] = [
+const filterItems: MenuProps['items'] = [
   {
     label: (
       <>
@@ -31,21 +32,30 @@ const items: MenuProps['items'] = [
   },
   {
     label: <FilterSort />,
-    key: '3',
+    key: '2',
+  },
+];
+
+const rowsPerPageItems: MenuProps['items'] = [
+  {
+    label: <p>3</p>,
+    key: '0',
+  },
+  {
+    label: <p>6</p>,
+    key: '1',
+  },
+  {
+    label: <p>9</p>,
+    key: '2',
   },
 ];
 
 export default function ShopPage() {
-  const [collapsed, setCollapsed] = useState(false);
-  const [openFilter, setOpenFilter] = useState(false);
-
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
   return (
-    <div className="pt-[4.5rem]">
-      <div className="hidden md:flex lg:mx-[4.5rem] lg:mt-10 lg:mb-20">
-        <div className="lg:min-w-64">
+    <div className="pt-[4.5rem] mt-10 md:mx-[3.5rem] md:mb-20 lg:mx-[4.5rem] lg:flex">
+      <div className="hidden lg:flex lg:flex-none">
+        <div className="lg:min-w-64 lg:mr-8">
           <FilterCategories />
           <hr className="bg-body-text opacity-15 my-10" />
           <FilterPriceRange />
@@ -53,10 +63,10 @@ export default function ShopPage() {
           <FilterSort />
         </div>
       </div>
-      <div className="my-10 mx-6 lg:hidden">
-        <Dropdown menu={{ items }} placement="bottomRight" open={openFilter}>
+      <div className="mb-6 mx-6 flex justify-between lg:hidden">
+        <Dropdown menu={{ items: filterItems }} placement="bottomRight">
           <a
-            onClick={() => setOpenFilter(!openFilter)}
+            onClick={(e) => e.preventDefault()}
             className="border border-solid border-body-text/20 border-1 px-[0.8rem] py-[0.3rem] rounded-full"
           >
             <Space>
@@ -65,6 +75,38 @@ export default function ShopPage() {
             </Space>
           </a>
         </Dropdown>
+        <Dropdown menu={{ items: rowsPerPageItems }} trigger={['click']}>
+          <a
+            onClick={(e) => e.preventDefault()}
+            className="border border-solid border-body-text/20 border-1 px-[0.8rem] py-[0.3rem] rounded-full"
+          >
+            <Space>
+              <p>Rows per page</p>
+              <ChevronDownIcon width={0} height={0} className="w-[10px] h-[10px]" />
+            </Space>
+          </a>
+        </Dropdown>
+      </div>
+      <div className="w-full">
+        <div className="mx-6 gap-x-5 gap-y-8 grid grid-cols-autoFill lg:grow">
+          {products.map((product, key) => (
+            <div key={key} className="mb-8 lg:mb-0">
+              <ProductItem
+                image={product.image}
+                isDiscount={product.isDiscount}
+                percentDiscount={product.percentDiscount}
+                productName={product.productName}
+                productCategory={product.productCategory}
+                price={product.price}
+                salePrice={product.salePrice}
+                rate={product.rate}
+                numberOfFeedbacks={product.numberOfFeedbacks}
+              />
+            </div>
+          ))}
+        </div>
+        <Pagination align="end" className="mt-14 hidden lg:flex" defaultCurrent={1} total={50} />
+        <Pagination align="center" className="my-14 lg:hidden" defaultCurrent={1} total={50} />
       </div>
     </div>
   );

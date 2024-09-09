@@ -41,6 +41,9 @@ const config: Config = {
           '0%': {transform: 'translateX(10%)'},
           '100%': {transform: 'translateX(-200%)'}
         }
+      },
+      gridTemplateColumns: {
+        autoFill: 'repeat(auto-fill, minmax(20rem, 1fr));',
       }
     },
   },
