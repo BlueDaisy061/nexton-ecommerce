@@ -42,7 +42,7 @@ export const ProductItem = ({
       <div className="px-4 flex justify-between">
         <div>
           <div className="mb-4">
-            <h4>{productName}</h4>
+            <h5>{productName}</h5>
             <p>{productCategory}</p>
           </div>
           <div className="flex gap-1">
