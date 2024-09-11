@@ -1,5 +1,6 @@
 export const products = [
   {
+    id: '1',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,
@@ -11,6 +12,7 @@ export const products = [
     numberOfFeedbacks: 98,
   },
   {
+    id: '2',
     image: '/watch.svg',
     isDiscount: false,
     percentDiscount: 50,
@@ -22,6 +24,7 @@ export const products = [
     numberOfFeedbacks: 79,
   },
   {
+    id: '3',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,
@@ -33,6 +36,7 @@ export const products = [
     numberOfFeedbacks: 101,
   },
   {
+    id: '4',
     image: '/watch.svg',
     isDiscount: false,
     percentDiscount: 30,
@@ -44,6 +48,7 @@ export const products = [
     numberOfFeedbacks: 20,
   },
   {
+    id: '5',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,
@@ -55,6 +60,7 @@ export const products = [
     numberOfFeedbacks: 98,
   },
   {
+    id: '6',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,
@@ -66,6 +72,7 @@ export const products = [
     numberOfFeedbacks: 98,
   },
   {
+    id: '7',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,
@@ -77,6 +84,7 @@ export const products = [
     numberOfFeedbacks: 98,
   },
   {
+    id: '8',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,
@@ -88,6 +96,7 @@ export const products = [
     numberOfFeedbacks: 98,
   },
   {
+    id: '9',
     image: '/watch.svg',
     isDiscount: true,
     percentDiscount: 50,

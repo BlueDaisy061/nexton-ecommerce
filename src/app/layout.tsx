@@ -40,20 +40,20 @@ export default function RootLayout({
       <body className={`${poppins.className}`}>
         <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 drop-shadow-sm md:px-[3.5rem] md:py-4 lg:px-[4.5rem]">
           <Image
-            src="logo.svg"
+            src="/logo.svg"
             alt="nexton-logo"
             width={100}
             height={42}
             className="hidden md:block"
           />
-          <Image src="favicon.svg" alt="favicon" width={24} height={24} className="md:hidden" />
+          <Image src="/favicon.svg" alt="favicon" width={24} height={24} className="md:hidden" />
           <NavLinks
             classNames="hidden md:text-sm md:flex md:flex-row md:leading-10"
             pathname={pathname}
           />
           <div className="bg-gray w-[200px] h-10 px-4 rounded-full flex items-center md:w-[250px] lg:w-[350px]">
             <Image
-              src="search-icon.svg"
+              src="/search-icon.svg"
               alt="search-icon"
               width={14}
               height={14}
@@ -70,14 +70,14 @@ export default function RootLayout({
               <Dropdown menu={{ items }} placement="bottomRight" trigger={['click']}>
                 <a onClick={(e) => e.preventDefault()}>
                   <Space className="hover:cursor-pointer">
-                    <Image src="user-icon.svg" alt="user-icon" width={24} height={24} />
+                    <Image src="/user-icon.svg" alt="user-icon" width={24} height={24} />
                   </Space>
                 </a>
               </Dropdown>
 
               <Link href={'/checkout'} className="relative">
                 <Image
-                  src="cart-icon.svg"
+                  src="/cart-icon.svg"
                   alt="cart-icon"
                   width={24}
                   height={24}
@@ -97,7 +97,7 @@ export default function RootLayout({
           {menuIsOpen ? (
             <button className="py-1 md:hidden " onClick={closeMenu}>
               <Image
-                src="close-icon.svg"
+                src="/close-icon.svg"
                 alt="close-icon"
                 width={32}
                 height={28}
@@ -106,7 +106,7 @@ export default function RootLayout({
             </button>
           ) : (
             <button className="py-1 md:hidden " onClick={openMenu}>
-              <Image src="hamburger-menu.svg" alt="hamburger-menu" width={32} height={28} />
+              <Image src="/hamburger-menu.svg" alt="hamburger-menu" width={32} height={28} />
             </button>
           )}
         </header>
@@ -155,22 +155,22 @@ export default function RootLayout({
         <footer className="bg-default pt-6 left-0 right-0 border-t border-t-border">
           <div className="grid grid-cols-1 gap-[60px] px-6 py-6 md:grid-cols-4 md:px-[3.5rem] lg:px-[5rem]">
             <div>
-              <Image src="logo.svg" alt="Nexton-logo" width={100} height={42} className="mb-5" />
+              <Image src="/logo.svg" alt="Nexton-logo" width={100} height={42} className="mb-5" />
               <div className="grid grid-cols-1 gap-3">
                 <div className="flex gap-2">
-                  <Image src="facebook-logo.svg" alt="facebook-logo" width={16} height={16} />
+                  <Image src="/facebook-logo.svg" alt="facebook-logo" width={16} height={16} />
                   <p>Facebook</p>
                 </div>
                 <div className="flex gap-2">
-                  <Image src="youtube-logo.svg" alt="youtube-logo" width={16} height={16} />
+                  <Image src="/youtube-logo.svg" alt="youtube-logo" width={16} height={16} />
                   <p>Youtube</p>
                 </div>
                 <div className="flex gap-2">
-                  <Image src="telegram-logo.svg" alt="telegram-logo" width={16} height={16} />
+                  <Image src="/telegram-logo.svg" alt="telegram-logo" width={16} height={16} />
                   <p>Telegram</p>
                 </div>
                 <div className="flex gap-2">
-                  <Image src="twitter-logo.svg" alt="twitter-logo" width={16} height={16} />
+                  <Image src="/twitter-logo.svg" alt="twitter-logo" width={16} height={16} />
                   <p>Twitter</p>
                 </div>
               </div>
@@ -209,7 +209,7 @@ export default function RootLayout({
               {['visa', 'paypal', 'stripe', 'verisign'].map((paymentMethod, key) => (
                 <Image
                   key={key}
-                  src={`${paymentMethod}.svg`}
+                  src={`/${paymentMethod}.svg`}
                   alt={paymentMethod}
                   width={0}
                   height={0}

@@ -9,6 +9,7 @@ import { CollectionCard } from './ui/collection-card';
 import { ProductItem } from './ui/product-item';
 import { Carousel } from 'antd';
 import { PrimaryButton } from './ui/button';
+import Link from 'next/link';
 
 export default function Home() {
   let carouselSettings = {
@@ -102,19 +103,9 @@ export default function Home() {
         <div>
           <Carousel autoplay {...carouselSettings} className="flex justify-between gap-5">
             {products.map((product, key) => (
-              <div key={key} className="px-2">
-                <ProductItem
-                  image={product.image}
-                  isDiscount={product.isDiscount}
-                  percentDiscount={product.percentDiscount}
-                  productName={product.productName}
-                  productCategory={product.productCategory}
-                  price={product.price}
-                  salePrice={product.salePrice}
-                  rate={product.rate}
-                  numberOfFeedbacks={product.numberOfFeedbacks}
-                />
-              </div>
+              <Link href={`/product/${product.id}`} key={key} className="px-2">
+                <ProductItem product={product} />
+              </Link>
             ))}
           </Carousel>
         </div>
@@ -128,19 +119,9 @@ export default function Home() {
         <div>
           <Carousel autoplay {...carouselSettings}>
             {products.map((product, key) => (
-              <div key={key} className="px-2">
-                <ProductItem
-                  image={product.image}
-                  isDiscount={product.isDiscount}
-                  percentDiscount={product.percentDiscount}
-                  productName={product.productName}
-                  productCategory={product.productCategory}
-                  price={product.price}
-                  salePrice={product.salePrice}
-                  rate={product.rate}
-                  numberOfFeedbacks={product.numberOfFeedbacks}
-                />
-              </div>
+              <Link href={`/product/${product.id}`} key={key} className="px-2">
+                <ProductItem product={product} />
+              </Link>
             ))}
           </Carousel>
         </div>
