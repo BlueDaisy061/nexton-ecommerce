@@ -32,10 +32,13 @@ export const ProductItem = ({
     rate,
     numberOfFeedbacks,
   } = product;
+
   return (
-    <div>
+    <>
       <div className="w-full bg-gray p-4 rounded-2xl relative mb-5">
-        <Image src={image} height={0} width={0} className="w-full h-96" alt={'product-image'} />
+        <div className="w-full aspect-square">
+          <Image src={image} alt={'product-detail'} fill className="object-contain rounded-2xl" />
+        </div>
         {isDiscount && (
           <div className="absolute flex items-center justify-between top-4 left-4 bg-default min-w-32 py-2 px-4 rounded-full">
             <PercentBadgeIcon className="w-4 h-4 text-body-text" />
@@ -66,6 +69,6 @@ export const ProductItem = ({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

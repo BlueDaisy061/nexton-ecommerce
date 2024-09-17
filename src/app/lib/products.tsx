@@ -1,7 +1,7 @@
 export const products = [
   {
     id: '1',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -13,7 +13,7 @@ export const products = [
   },
   {
     id: '2',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: false,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -25,7 +25,7 @@ export const products = [
   },
   {
     id: '3',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -37,7 +37,7 @@ export const products = [
   },
   {
     id: '4',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: false,
     percentDiscount: 30,
     productName: 'Black Automatic Watch',
@@ -49,7 +49,7 @@ export const products = [
   },
   {
     id: '5',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -61,7 +61,7 @@ export const products = [
   },
   {
     id: '6',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -73,7 +73,7 @@ export const products = [
   },
   {
     id: '7',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -85,7 +85,7 @@ export const products = [
   },
   {
     id: '8',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
@@ -97,7 +97,7 @@ export const products = [
   },
   {
     id: '9',
-    image: '/watch.svg',
+    image: '/product-detail-1.png',
     isDiscount: true,
     percentDiscount: 50,
     productName: 'Black Automatic Watch',
