@@ -8,9 +8,9 @@ export type ProductInfo = {
   percentDiscount?: number;
   productName: string;
   productCategory: string;
-  price: string;
-  salePrice: string;
-  rate: string;
+  price: number;
+  salePrice: number;
+  rate: number;
   numberOfFeedbacks: number;
 };
 
@@ -35,9 +35,9 @@ export const ProductItem = ({
 
   return (
     <>
-      <div className="w-full bg-gray p-4 rounded-2xl relative mb-5">
+      <div className="w-full bg-gray p-4 rounded-2xl relative">
         <div className="w-full aspect-square">
-          <Image src={image} alt={'product-detail'} fill className="object-contain rounded-2xl" />
+          <Image src={image} alt={'product-detail'} fill className="object-cover rounded-2xl" />
         </div>
         {isDiscount && (
           <div className="absolute flex items-center justify-between top-4 left-4 bg-default min-w-32 py-2 px-4 rounded-full">
@@ -64,8 +64,8 @@ export const ProductItem = ({
             </div>
           </div>
           <div className="flex flex-col items-end">
-            <h4>{salePrice}</h4>
-            <p className="line-through">{price}</p>
+            <h4>${salePrice}</h4>
+            <p className="line-through">${price}</p>
           </div>
         </div>
       )}
