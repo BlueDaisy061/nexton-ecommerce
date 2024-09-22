@@ -38,15 +38,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className}`}>
-        <header className="flex justify-between content-center bg-default px-4 py-5 top-0 left-0 right-0 fixed z-10 drop-shadow-sm md:px-[3.5rem] md:py-4 lg:px-[4.5rem]">
-          <Image
-            src="/logo.svg"
-            alt="nexton-logo"
-            width={100}
-            height={42}
-            className="hidden md:block"
-          />
-          <Image src="/favicon.svg" alt="favicon" width={24} height={24} className="md:hidden" />
+        <header className="flex justify-between content-center bg-default px-6 py-5 top-0 left-0 right-0 fixed z-10 drop-shadow-sm md:px-[3.5rem] md:py-4 lg:px-[4.5rem]">
+          <Link href={'/'} className="hidden md:block">
+            <Image src="/logo.svg" alt="nexton-logo" width={100} height={42} />
+          </Link>
+          <Link href={'/'} className="self-center md:hidden">
+            <Image src="/favicon.svg" alt="favicon" width={24} height={24} />
+          </Link>
           <NavLinks
             classNames="hidden md:text-sm md:flex md:flex-row md:leading-10"
             pathname={pathname}

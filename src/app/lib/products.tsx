@@ -19,7 +19,6 @@ export const products = [
     productName: 'Black Automatic Watch',
     productCategory: 'Accessories',
     price: 100.98,
-    salePrice: 90.98,
     rate: 4.8,
     numberOfFeedbacks: 79,
   },

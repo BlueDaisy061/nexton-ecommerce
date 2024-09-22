@@ -6,6 +6,7 @@ export type ProductDetailType = {
   material: string;
   color: string;
   salesCount: number;
+  keywords: string[];
 };
 
 export const productsDetail = [
@@ -18,6 +19,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
   {
     id: '2',
@@ -28,6 +30,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory'],
   },
   {
     id: '3',
@@ -38,6 +41,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat'],
   },
   {
     id: '4',
@@ -48,6 +52,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
   {
     id: '5',
@@ -58,6 +63,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
   {
     id: '6',
@@ -68,6 +74,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
   {
     id: '7',
@@ -78,6 +85,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
   {
     id: '8',
@@ -88,6 +96,7 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
   {
     id: '9',
@@ -98,5 +107,6 @@ export const productsDetail = [
     material: 'Soft wool blend',
     color: 'Various',
     salesCount: 0,
+    keywords: ["men's fashion", 'winter hat', 'colorful accessory', 'warm headwear'],
   },
 ];

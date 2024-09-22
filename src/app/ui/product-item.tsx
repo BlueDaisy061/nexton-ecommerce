@@ -9,7 +9,7 @@ export type ProductInfo = {
   productName: string;
   productCategory: string;
   price: number;
-  salePrice: number;
+  salePrice?: number;
   rate: number;
   numberOfFeedbacks: number;
 };
@@ -50,7 +50,7 @@ export const ProductItem = ({
         </div>
       </div>
       {showDetail && (
-        <div className="px-4 flex justify-between">
+        <div className="px-4 mt-3 flex justify-between">
           <div>
             <div className="mb-4">
               <h5>{productName}</h5>
@@ -63,10 +63,13 @@ export const ProductItem = ({
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-end">
-            <h4>${salePrice}</h4>
-            <p className="line-through">${price}</p>
-          </div>
+          {salePrice && (
+            <div className="flex flex-col items-end">
+              <h5>${salePrice.toFixed(2)}</h5>
+              <p className="line-through">${price.toFixed(2)}</p>
+            </div>
+          )}
+          {!salePrice && <h5>${price.toFixed(2)}</h5>}
         </div>
       )}
     </>
