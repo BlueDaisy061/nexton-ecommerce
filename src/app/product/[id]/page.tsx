@@ -145,7 +145,7 @@ export default function ProductPage() {
                 <p>
                   ${productPrice} x {quantity}
                 </p>
-                <p>${productPrice * quantity}</p>
+                <p>${(productPrice * quantity).toFixed(2)}</p>
               </div>
               <div className="flex justify-between">
                 <p>Tax estimate</p>
