@@ -6,6 +6,7 @@ import { FilterSort } from '../ui/filter-sort';
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { products } from '../lib/products';
 import { ProductItem } from '../ui/product-item';
+import Link from 'next/link';
 
 const filterItems: MenuProps['items'] = [
   {
@@ -90,19 +91,9 @@ export default function ShopPage() {
       <div className="w-full">
         <div className="mx-6 gap-x-5 gap-y-8 grid grid-cols-autoFill lg:grow">
           {products.map((product, key) => (
-            <div key={key} className="mb-8 lg:mb-0">
-              <ProductItem
-                image={product.image}
-                isDiscount={product.isDiscount}
-                percentDiscount={product.percentDiscount}
-                productName={product.productName}
-                productCategory={product.productCategory}
-                price={product.price}
-                salePrice={product.salePrice}
-                rate={product.rate}
-                numberOfFeedbacks={product.numberOfFeedbacks}
-              />
-            </div>
+            <Link href={`/product/${product.id}`} key={key} className="mb-8 lg:mb-0">
+              <ProductItem product={product} />
+            </Link>
           ))}
         </div>
         <Pagination align="end" className="mt-14 hidden lg:flex" defaultCurrent={1} total={50} />

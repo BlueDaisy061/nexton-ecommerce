@@ -2,46 +2,17 @@ import Image from 'next/image';
 
 import { CarouselWrapper } from './ui/carousel';
 import { FeatureCard } from './ui/featureCard';
-import { collection, websiteFeatures } from './lib/constants';
+import { collection, websiteFeatures, carouselSettings } from './lib';
 import { products } from './lib/products';
 import { Collection } from './ui/collection';
 import { CollectionCard } from './ui/collection-card';
 import { ProductItem } from './ui/product-item';
 import { Carousel } from 'antd';
 import { PrimaryButton } from './ui/button';
+import { RecommendedProducts } from './ui/recommended-products';
+import Link from 'next/link';
 
 export default function Home() {
-  let carouselSettings = {
-    dots: false,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 1100,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 789,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <div className="pt-[4.5rem]">
       <div className="w-full h-auto bg-banner-gray md:flex md:justify-between md:items-center">
@@ -100,23 +71,7 @@ export default function Home() {
           </h2>
         </div>
         <div>
-          <Carousel autoplay {...carouselSettings} className="flex justify-between gap-5">
-            {products.map((product, key) => (
-              <div key={key} className="px-2">
-                <ProductItem
-                  image={product.image}
-                  isDiscount={product.isDiscount}
-                  percentDiscount={product.percentDiscount}
-                  productName={product.productName}
-                  productCategory={product.productCategory}
-                  price={product.price}
-                  salePrice={product.salePrice}
-                  rate={product.rate}
-                  numberOfFeedbacks={product.numberOfFeedbacks}
-                />
-              </div>
-            ))}
-          </Carousel>
+          <RecommendedProducts />
         </div>
       </div>
       {/* Best sellers section */}
@@ -128,19 +83,9 @@ export default function Home() {
         <div>
           <Carousel autoplay {...carouselSettings}>
             {products.map((product, key) => (
-              <div key={key} className="px-2">
-                <ProductItem
-                  image={product.image}
-                  isDiscount={product.isDiscount}
-                  percentDiscount={product.percentDiscount}
-                  productName={product.productName}
-                  productCategory={product.productCategory}
-                  price={product.price}
-                  salePrice={product.salePrice}
-                  rate={product.rate}
-                  numberOfFeedbacks={product.numberOfFeedbacks}
-                />
-              </div>
+              <Link href={`/product/${product.id}`} key={key} className="px-2">
+                <ProductItem product={product} />
+              </Link>
             ))}
           </Carousel>
         </div>
