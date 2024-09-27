@@ -1,4 +1,5 @@
 'use client';
+import { ThemeContext } from '@/app/(context)/context';
 import { productsDetail } from '@/app/lib/product-detail';
 import { products } from '@/app/lib/products';
 import { PrimaryButton } from '@/app/ui/button';
@@ -8,9 +9,10 @@ import { StarIcon } from '@heroicons/react/16/solid';
 import { ShoppingBagIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export default function ProductPage() {
+  const { addProductToCart } = React.useContext(ThemeContext);
   const pathname = usePathname();
   const productId = pathname.split('/')[2];
   const product = products.find((product) => product.id === productId);
