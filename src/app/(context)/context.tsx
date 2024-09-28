@@ -1,22 +1,33 @@
 'use client';
 
-import React from 'react';
-import { ProductInfo } from '../ui/product-item';
+import React, { useState } from 'react';
 
-export const ThemeContext = React.createContext({
-  listOfCheckoutProducts: [],
-  addProductToCart: ({ product }: { product: ProductInfo }) => {},
-});
+export const ProductContext = React.createContext<{
+  listOfCheckoutProducts: any[];
+  addProductToCart: (product: any) => void;
+}>({ listOfCheckoutProducts: [], addProductToCart: (product) => {} });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const listOfCheckoutProducts: any = [];
+  const [listOfCheckoutProducts, setListOfCheckoutProducts] = useState<any>([]);
 
-  const addProductToCart = ({ product }: { product: ProductInfo }) => {
+  const addProductToCart = (product: any) => {
+    let existingProduct;
+    if (listOfCheckoutProducts.length > 0) {
+      existingProduct = listOfCheckoutProducts.find(
+        (p: any) => p.productId === product.productId && p.productSize === product.productSize
+      );
+    }
+
+    if (existingProduct) {
+      existingProduct.quantity += product.quantity;
+      return;
+    }
     listOfCheckoutProducts.push(product);
   };
+
   return (
-    <ThemeContext.Provider value={{ listOfCheckoutProducts, addProductToCart }}>
+    <ProductContext.Provider value={{ listOfCheckoutProducts, addProductToCart }}>
       {children}
-    </ThemeContext.Provider>
+    </ProductContext.Provider>
   );
 };

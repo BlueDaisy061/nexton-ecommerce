@@ -1,9 +1,10 @@
 'use client';
-import { ThemeContext } from '@/app/(context)/context';
+import { ProductContext } from '@/app/(context)/context';
 import { productsDetail } from '@/app/lib/product-detail';
 import { products } from '@/app/lib/products';
 import { PrimaryButton } from '@/app/ui/button';
 import { ProductItem } from '@/app/ui/product-item';
+import { QuantityPicker } from '@/app/ui/quantityPicker';
 import { RecommendedProducts } from '@/app/ui/recommended-products';
 import { StarIcon } from '@heroicons/react/16/solid';
 import { ShoppingBagIcon, SparklesIcon } from '@heroicons/react/24/outline';
@@ -12,7 +13,7 @@ import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function ProductPage() {
-  const { addProductToCart } = React.useContext(ThemeContext);
+  const { addProductToCart } = React.useContext(ProductContext);
   const pathname = usePathname();
   const productId = pathname.split('/')[2];
   const product = products.find((product) => product.id === productId);
@@ -33,6 +34,21 @@ export default function ProductPage() {
     if (theQuantity <= 999) {
       setQuantity(theQuantity);
     }
+  };
+
+  const handleAddProductToCart = () => {
+    const pickedProduct: any = {
+      productId: product.id,
+      productName: product.productName,
+      productImg: '/product-detail-1.png',
+      productSize: size,
+      quantity: quantity,
+      productPrice: product.price,
+      productSalePrice: product.salePrice,
+      tax: productDetail?.tax,
+    };
+
+    addProductToCart(pickedProduct);
   };
 
   return (
@@ -105,39 +121,26 @@ export default function ProductPage() {
             </div>
           </div>
           <div className="flex justify-between lg:items-center">
-            <div className="flex gap-3 items-center px-3 rounded-full bg-body-text/5 lg:h-[80%]">
-              <button
-                className="rounded-full flex items-center justify-center border bg-default border-border w-5 h-5"
-                onClick={() => {
-                  if (quantity > 1) {
-                    setQuantity(quantity - 1);
-                  }
-                }}
-              >
-                -
-              </button>
-              <input
-                type="text"
-                value={quantity}
-                className="w-7 text-sm text-center bg-border/5 placeholder:bg-gray focus:outline-none"
-                onChange={(e) => handleProductQuantity(Number(e.target.value))}
-              />
-              <button
-                className="rounded-full flex items-center justify-center border bg-default border-border w-5 h-5"
-                onClick={() => {
-                  if (quantity < 999) {
-                    setQuantity(quantity + 1);
-                  }
-                }}
-              >
-                +
-              </button>
-            </div>
+            <QuantityPicker
+              initQuantity={quantity}
+              onDecrease={() => {
+                if (quantity > 1) {
+                  setQuantity(quantity - 1);
+                }
+              }}
+              onIncrease={() => {
+                if (quantity < 999) {
+                  setQuantity(quantity + 1);
+                }
+              }}
+              onChangeProductQuantity={(e) => handleProductQuantity(Number(e.target.value))}
+            />
             <Link href={'/checkout'}>
               <PrimaryButton
                 title={'Add to cart'}
                 leftIcon={<ShoppingBagIcon className="w-4 h-4" />}
                 style="hover:drop-shadow-xl"
+                onClick={() => handleAddProductToCart()}
               />
             </Link>
           </div>
