@@ -13,7 +13,7 @@ import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function ProductPage() {
-  const { addProductToCart } = React.useContext(ProductContext);
+  const { listOfCheckoutProducts, addProductToCart } = React.useContext(ProductContext);
   const pathname = usePathname();
   const productId = pathname.split('/')[2];
   const product = products.find((product) => product.id === productId);
@@ -49,6 +49,7 @@ export default function ProductPage() {
     };
 
     addProductToCart(pickedProduct);
+    localStorage.setItem("checkoutProducts", JSON.stringify(listOfCheckoutProducts))
   };
 
   return (

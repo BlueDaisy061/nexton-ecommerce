@@ -14,7 +14,7 @@ export const QuantityPicker = ({
   isCheckout?: boolean;
 }) => {
   return (
-    <div className="flex gap-3 items-center px-3 rounded-full bg-body-text/5 lg:h-[80%]">
+    <div className="flex gap-3 items-center px-3 py-3 h-[80%] rounded-full bg-body-text/5 lg:h-[80%]">
       <button
         className="rounded-full flex items-center justify-center border bg-default border-border w-5 h-5"
         onClick={onDecrease}
