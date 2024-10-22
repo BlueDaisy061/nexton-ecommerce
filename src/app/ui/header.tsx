@@ -6,13 +6,12 @@ import { PrimaryButton, SecondaryButton } from './button';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import React from 'react';
-import { ProductContext } from '../(context)/context';
 
 export const Header = () => {
   const isLoggedIn = true;
   const pathname = usePathname();
   const [menuIsOpen, setMenuIsOpen] = useState<Boolean>(false);
-  const { listOfCheckoutProducts } = React.useContext(ProductContext);
+  const listOfProducts = JSON.parse(localStorage.getItem('checkoutProducts') || '[]');
 
   const openMenu = () => {
     setMenuIsOpen(true);
@@ -74,7 +73,7 @@ export const Header = () => {
                 className="ml-[1vw]"
               />
               <div className="rounded-full bg-vibrant w-5 h-5 text-xs text-default text-center leading-5 absolute -top-3 -right-4">
-                {listOfCheckoutProducts.length}
+                {listOfProducts.length}
               </div>
             </Link>
           </div>
@@ -115,7 +114,7 @@ export const Header = () => {
               <>
                 <li className={pathname === '/checkout' ? 'font-semibold' : ''}>
                   <Link className="px-4" href={'/checkout'}>
-                    Cart ({listOfCheckoutProducts.length})
+                    Cart ({listOfProducts.length})
                   </Link>
                 </li>
                 <li className={pathname === '/login' ? 'font-semibold' : ''}>

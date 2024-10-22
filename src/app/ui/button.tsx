@@ -13,7 +13,7 @@ export const PrimaryButton = ({
 }) => {
   return (
     <button
-      className={`${style} rounded-full flex gap-2 items-center bg-primary-color text-sm text-default py-[10px] px-5 lg:py-4 lg:px-8 lg:text-base`}
+      className={`${style} rounded-full flex gap-2 items-center justify-center bg-primary-color text-sm text-default py-[10px] px-5 lg:py-4 lg:px-8 lg:text-base`}
       onClick={onClick}
     >
       {leftIcon}

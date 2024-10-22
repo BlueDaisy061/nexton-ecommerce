@@ -49,7 +49,7 @@ export default function ProductPage() {
     };
 
     addProductToCart(pickedProduct);
-    localStorage.setItem("checkoutProducts", JSON.stringify(listOfCheckoutProducts))
+    localStorage.setItem('checkoutProducts', JSON.stringify(listOfCheckoutProducts));
   };
 
   return (
