@@ -10,12 +10,12 @@ import { PrimaryButton } from '../ui/button';
 
 export default function CheckoutPage() {
   const [listOfStoreProducts, setListOfStoreProducts] = useState<any>(
-    JSON.parse(localStorage.getItem('checkoutProducts') || '[]')
+    // JSON.parse(localStorage.getItem('checkoutProducts') || '[]')
+    []
   );
 
   const setQuantity = (product: any, amount: number) => {
     if (product.quantity === 1 && amount === -1) {
-      console.log('NO NO NO');
       return;
     }
 
