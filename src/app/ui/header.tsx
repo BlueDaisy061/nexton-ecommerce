@@ -11,7 +11,7 @@ export const Header = () => {
   const isLoggedIn = true;
   const pathname = usePathname();
   const [menuIsOpen, setMenuIsOpen] = useState<Boolean>(false);
-  const listOfProducts = JSON.parse(localStorage.getItem('checkoutProducts') || '[]');
+  const listOfProducts = [];
 
   const openMenu = () => {
     setMenuIsOpen(true);
