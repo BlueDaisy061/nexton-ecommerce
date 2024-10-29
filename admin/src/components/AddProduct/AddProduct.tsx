@@ -73,7 +73,7 @@ function AddProduct() {
         <Input type="file" name="image" id="file-input" hidden />
       </div>
       <Button type="primary" shape="round" size="large" className="bg-primary-color">
-        Download
+        Add image
       </Button>
     </div>
   );
