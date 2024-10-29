@@ -35,7 +35,7 @@ const categories = [
 
 function AddProduct() {
   return (
-    <div className="">
+    <div className="box-border w-full px-14 py-8 mx-8 my-5 rounded-sm bg-default lg:max-w-[800px]">
       <div>
         <p>Product title</p>
         <Input size="large" placeholder="Product name..." name="name" />
@@ -65,15 +65,15 @@ function AddProduct() {
       </div>
       <div>
         <label htmlFor="file-input">
-          <div className="py-20 px-7 bg-default border-[1px] border-dashed border-border">
-            <p>Upload product image</p>
-            <ArrowUpTrayIcon className="w-6 self-center mt-4" />
+          <div className="py-20 px-7 flex flex-col bg-default border-[1px] border-dashed border-border">
+            <p className="self-center">Upload product image</p>
+            <ArrowUpTrayIcon className="w-6 mt-4 self-center" />
           </div>
         </label>
         <Input type="file" name="image" id="file-input" hidden />
       </div>
       <Button type="primary" shape="round" size="large" className="bg-primary-color">
-        Add image
+        Add product
       </Button>
     </div>
   );
