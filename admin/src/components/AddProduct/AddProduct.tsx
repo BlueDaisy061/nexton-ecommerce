@@ -35,23 +35,23 @@ const categories = [
 
 function AddProduct() {
   return (
-    <div className="box-border w-full px-14 py-8 mx-8 my-5 rounded-sm bg-default lg:max-w-[800px]">
+    <div className="box-border w-full flex flex-col gap-6 px-14 py-8 mx-8 my-5 rounded-sm bg-default lg:max-w-[800px]">
       <div>
-        <p>Product title</p>
+        <p className="mb-2">Product title</p>
         <Input size="large" placeholder="Product name..." name="name" />
       </div>
-      <div>
-        <div>
-          <p>Price</p>
+      <div className="flex justify-between">
+        <div className="w-[45%]">
+          <p className="mb-2">Price</p>
           <Input size="large" name="old_price" />
         </div>
-        <div>
-          <p>Offer Price</p>
+        <div className="w-[45%]">
+          <p className="mb-2">Offer Price</p>
           <Input size="large" name="sale_price" />
         </div>
       </div>
       <div>
-        <p>Product Category</p>
+        <p className="mb-2">Product Category</p>
         <Select
           showSearch
           placeholder="Search category"
@@ -61,6 +61,7 @@ function AddProduct() {
             (optA?.label ?? '').toLowerCase().localeCompare((optB?.label ?? '').toLowerCase())
           }
           options={categories}
+          className="w-[45%]"
         />
       </div>
       <div>
@@ -72,7 +73,7 @@ function AddProduct() {
         </label>
         <Input type="file" name="image" id="file-input" hidden />
       </div>
-      <Button type="primary" shape="round" size="large" className="bg-primary-color">
+      <Button type="primary" shape="round" size="large" className="bg-primary-color w-fit mt-2">
         Add product
       </Button>
     </div>
