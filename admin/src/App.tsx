@@ -1,13 +1,16 @@
 import React from 'react';
 import NavBar from './components/Navbar/NavBar';
 import { Admin } from './pages';
+import { ConfigProvider } from 'antd';
 
 function App() {
   return (
-    <div>
-      <NavBar />
-      <Admin />
-    </div>
+    <ConfigProvider theme={{ token: { fontFamily: 'Poppins' } }}>
+      <div className="bg-gray h-[100vh]">
+        <NavBar />
+        <Admin />
+      </div>
+    </ConfigProvider>
   );
 }
 
