@@ -6,7 +6,7 @@ import { ConfigProvider } from 'antd';
 function App() {
   return (
     <ConfigProvider theme={{ token: { fontFamily: 'Poppins' } }}>
-      <div className="bg-gray h-[100vh]">
+      <div className="bg-gray h-min-[100vh]">
         <NavBar />
         <Admin />
       </div>

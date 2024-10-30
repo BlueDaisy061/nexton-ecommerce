@@ -4,7 +4,7 @@ import { PlusCircleIcon, BuildingStorefrontIcon } from '@heroicons/react/24/outl
 
 function SideBar() {
   return (
-    <div className="bg-default flex flex-row w-full lg:max-w-[250px] lg:flex-col lg:pt-8 lg:h-[100vh]">
+    <div className="bg-default flex flex-row w-full lg:max-w-[250px] lg:flex-col lg:h-min-[100vh]">
       <Link to={'/add-product'} className="no-underline w-[50vw] lg:w-auto">
         <div className="w-full flex items-center justify-center gap-4 py-7 px-6 border-b-[1px] border-border lg:justify-start">
           <PlusCircleIcon className="w-5 h-5" />
