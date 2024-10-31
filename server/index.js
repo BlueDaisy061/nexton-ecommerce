@@ -29,7 +29,7 @@ const Product = mongoose.model('Product', {
     type: Number,
     required: true,
   },
-  name: {
+  productName: {
     type: String,
     required: true,
   },
@@ -37,15 +37,15 @@ const Product = mongoose.model('Product', {
     type: String,
     required: true,
   },
-  category: {
+  productCategory: {
     type: String,
     required: true,
   },
-  new_price: {
+  salePrice: {
     type: Number,
     required: true,
   },
-  old_price: {
+  price: {
     type: Number,
     required: true,
   },
@@ -84,11 +84,11 @@ app.post('/add-product', async (req, res) => {
   }
   const product = new Product({
     id: id,
-    name: req.body.name,
+    productName: req.body.productName,
     image: req.body.image,
-    category: req.body.category,
-    new_price: req.body.new_price,
-    old_price: req.body.old_price,
+    productCategory: req.body.productCategory,
+    salePrice: req.body.salePrice,
+    price: req.body.price,
   });
   console.log(product);
   await product.save();
@@ -104,7 +104,7 @@ app.delete('/remove-product', async (req, res) => {
   console.log('Removed.');
   res.json({
     success: true,
-    name: req.body.name,
+    name: req.body.productName,
   });
 });
 
@@ -116,7 +116,7 @@ app.get('/all-products', async (req, res) => {
 
 app.listen(port, (error) => {
   if (!error) {
-    console.log('Server is running on port ', port);
+    console.log('Server is running on port', port);
   } else {
     console.log('Error: ', error);
   }
