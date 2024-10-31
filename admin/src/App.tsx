@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './components/Navbar/NavBar';
-import { Admin } from './pages';
+import Admin from './pages/admin/Admin';
 import { ConfigProvider } from 'antd';
 
 function App() {
