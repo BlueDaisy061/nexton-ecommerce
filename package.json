@@ -14,7 +14,8 @@
     "antd": "^5.19.1",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
     "@types/node": "^20",
