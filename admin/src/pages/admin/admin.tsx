@@ -1,6 +1,6 @@
 import React from 'react';
 import SideBar from '../../components/SideBar/SideBar';
-import { BrowserRouter as Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AddProduct from '../../components/AddProduct/AddProduct';
 import ListProduct from '../../components/ListProduct/ListProduct';
 
@@ -10,7 +10,7 @@ function Admin() {
       <SideBar />
       <Routes>
         <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/list-product" element={<ListProduct />} />
+        <Route path="/list-products" element={<ListProduct />} />
       </Routes>
     </div>
   );
