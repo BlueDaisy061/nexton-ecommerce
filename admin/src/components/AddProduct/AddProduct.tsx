@@ -92,6 +92,14 @@ function AddProduct() {
         });
     }
     console.log(product);
+    setProductDetails({
+      productName: '',
+      price: '',
+      salePrice: '',
+      productCategory: '',
+      image: '',
+    });
+    setImage('');
   };
 
   return (

@@ -99,12 +99,18 @@ app.post('/add-product', async (req, res) => {
   });
 });
 
-app.delete('/remove-product', async (req, res) => {
-  await Product.findOneAndDelete({ id: req.body.id });
+app.delete('/remove-products', async (req, res) => {
+  const ids = req.body;
+  console.log(ids);
+  try {
+    await Product.deleteMany({ id: { $in: ids } });
+  } catch (error) {
+    throw new Error('Cannot delete selected products');
+  }
   console.log('Removed.');
   res.json({
     success: true,
-    name: req.body.productName,
+    deleted: req.body,
   });
 });
 

@@ -48,6 +48,7 @@ const columns: TableProps<ProductDetailDataType>['columns'] = [
 function ListProduct() {
   const [allProducts, setAllProducts] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const fetchProductList = async () => {
@@ -71,12 +72,26 @@ function ListProduct() {
 
   const deleteSelectedProductsHandler = async () => {
     setLoading(true);
-    await fetch('');
+    await fetch('http://localhost:4000/remove-products', {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(selectedProducts),
+    });
+    await fetchProductList();
+    setSelectedRowKeys([]);
     setLoading(false);
   };
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     setSelectedRowKeys(newSelectedRowKeys);
+    setSelectedProducts(
+      allProducts
+        .filter((product: ProductDetailDataType) => newSelectedRowKeys.includes(product.key))
+        .map((p: ProductDetailDataType) => p.id)
+    );
   };
 
   const rowSelection: TableRowSelection<ProductDetailDataType> = {
