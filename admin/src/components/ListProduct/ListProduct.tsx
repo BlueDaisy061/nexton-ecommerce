@@ -5,7 +5,11 @@ import { PencilSquareIcon } from '@heroicons/react/24/outline';
 
 type TableRowSelection<T extends object = object> = TableProps<T>['rowSelection'];
 
-const columns: TableProps<ProductDetail>['columns'] = [
+type ProductDetailDataType = ProductDetail & {
+  key: React.Key;
+};
+
+const columns: TableProps<ProductDetailDataType>['columns'] = [
   {
     title: 'Product name',
     dataIndex: 'productName',
@@ -15,7 +19,9 @@ const columns: TableProps<ProductDetail>['columns'] = [
     title: 'Image',
     dataIndex: 'image',
     key: 'image',
-    render: (image, record) => <img src={image} alt={record.productName} className="w-40 p-5" />,
+    render: (image, record) => (
+      <img src={image} alt={record.productName} className="w-24 h-24 object-cover" />
+    ),
   },
   {
     title: 'Price',
@@ -47,50 +53,63 @@ function ListProduct() {
   const fetchProductList = async () => {
     await fetch('http://localhost:4000/all-products')
       .then((res) => res.json())
-      .then((data) => setAllProducts(data));
+      .then((data) =>
+        setAllProducts(
+          data.map((p: ProductDetail, i: any) => {
+            return {
+              ...p,
+              key: i,
+            };
+          })
+        )
+      );
   };
 
   useEffect(() => {
     fetchProductList();
   }, []);
 
-  const start = () => {
+  const deleteSelectedProductsHandler = async () => {
     setLoading(true);
-    setTimeout(() => {
-      setSelectedRowKeys([]);
-      setLoading(false);
-    }, 1000);
+    await fetch('');
+    setLoading(false);
   };
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const rowSelection: TableRowSelection<ProductDetail> = {
+  const rowSelection: TableRowSelection<ProductDetailDataType> = {
     selectedRowKeys,
-    onChange: onSelectChange,
+    onChange: (selectedRowKey) => onSelectChange(selectedRowKey),
   };
 
   const hasSelected = selectedRowKeys.length > 0;
 
   return (
-    <div className="p-10">
-      <h3>All product list</h3>
-      {/* <Table<ProductDetail> columns={columns} dataSource={allProducts} className="w-full" /> */}
-      <Flex gap="middle" vertical>
-        <Flex align="center" gap="middle">
-          <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
-            Delete
-          </Button>
-          {hasSelected ? `Selected ${selectedRowKeys.length} items` : null}
+    <div className="py-6 px-10 w-full">
+      <h3 className="flex justify-center">All product list</h3>
+      <div className="mt-4 lg:mt-6">
+        <Flex gap="middle" vertical>
+          <Flex align="center" gap="middle">
+            <Button
+              type="primary"
+              onClick={deleteSelectedProductsHandler}
+              disabled={!hasSelected}
+              loading={loading}
+            >
+              Delete
+            </Button>
+            <p>{hasSelected ? `Selected ${selectedRowKeys.length} items` : null}</p>
+          </Flex>
+          <Table<ProductDetailDataType>
+            rowSelection={rowSelection}
+            columns={columns}
+            dataSource={allProducts}
+            pagination={{ pageSize: 4, hideOnSinglePage: true }}
+          />
         </Flex>
-        <Table<ProductDetail>
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={allProducts}
-        />
-      </Flex>
+      </div>
     </div>
   );
 }

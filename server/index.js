@@ -43,7 +43,7 @@ const Product = mongoose.model('Product', {
   },
   salePrice: {
     type: Number,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,
