@@ -24,6 +24,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Models
+
 const Product = mongoose.model('Product', {
   id: {
     type: Number,
@@ -56,6 +58,26 @@ const Product = mongoose.model('Product', {
   available: {
     type: Boolean,
     default: true,
+  },
+});
+
+const Users = mongoose.model('Users', {
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+  },
+  cartData: {
+    type: Object,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
