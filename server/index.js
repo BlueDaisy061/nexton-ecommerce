@@ -24,6 +24,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Models
+
 const Product = mongoose.model('Product', {
   id: {
     type: Number,
@@ -43,7 +45,7 @@ const Product = mongoose.model('Product', {
   },
   salePrice: {
     type: Number,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,
@@ -59,7 +61,27 @@ const Product = mongoose.model('Product', {
   },
 });
 
-// App endpoints
+const Users = mongoose.model('Users', {
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+  },
+  cartData: {
+    type: Object,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// App endpoints for products
 
 app.get('/', (req, res) => {
   res.send('App is running');
@@ -99,12 +121,18 @@ app.post('/add-product', async (req, res) => {
   });
 });
 
-app.delete('/remove-product', async (req, res) => {
-  await Product.findOneAndDelete({ id: req.body.id });
+app.delete('/remove-products', async (req, res) => {
+  const ids = req.body;
+  console.log(ids);
+  try {
+    await Product.deleteMany({ id: { $in: ids } });
+  } catch (error) {
+    throw new Error('Cannot delete selected products');
+  }
   console.log('Removed.');
   res.json({
     success: true,
-    name: req.body.productName,
+    deleted: req.body,
   });
 });
 
@@ -112,6 +140,57 @@ app.get('/all-products', async (req, res) => {
   let products = await Product.find({});
   console.log('All product fetched');
   res.send(products);
+});
+
+// App endpoints for users
+
+app.post('/signup', async (req, res) => {
+  let check = await Users.findOne({ email: req.body.email });
+  if (check) {
+    return res.status(400).json({ success: false, errors: 'Existing user found with same email.' });
+  }
+  let cart = {};
+  for (let i = 0; i < 300; i++) {
+    cart[i] = 0;
+  }
+
+  const user = new Users({
+    name: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    cartData: cart,
+  });
+
+  await user.save();
+
+  const data = {
+    user: {
+      id: user.id,
+    },
+  };
+
+  const token = jwt.sign(data, 'secret_ecom');
+  res.json({ success: true, token });
+});
+
+app.post('/login', async (req, res) => {
+  let user = await Users.findOne({ email: req.body.email });
+  if (user) {
+    const passCompare = req.body.password === user.password;
+    if (passCompare) {
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(data, 'secret_ecom');
+      res.json({ success: true, token });
+    } else {
+      res.json({ success: false, errors: 'Wrong password.' });
+    }
+  } else {
+    res.json({ success: false, errors: 'Not registered email.' });
+  }
 });
 
 app.listen(port, (error) => {
