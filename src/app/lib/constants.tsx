@@ -63,3 +63,8 @@ export const collection = [
     description: 'Explore accessories',
   },
 ];
+
+export const loggedInErrors = {
+  WRONG_PASSWORD: 'Wrong password.',
+  UNREGISTER: 'Not registered email.',
+};

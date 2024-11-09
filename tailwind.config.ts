@@ -20,7 +20,8 @@ const config: Config = {
       'default': '#FFFFFF',
       'gray': '#F8F8F8',
       'banner-gray': '#F5F5F5',
-      'yellow': '#FBBF24'
+      'yellow': '#FBBF24',
+      'red': '#FF0000'
     },
     extend: {
       backgroundImage: {

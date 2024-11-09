@@ -11,6 +11,10 @@ export default function RegisterPage() {
         <h2 className="text-center mb-10">Register</h2>
         <form action="" className="flex flex-col gap-6">
           <div>
+            <h5 className="mb-2">Username</h5>
+            <Input size="large" placeholder="User name..." />
+          </div>
+          <div>
             <h5 className="mb-2">Email</h5>
             <Input size="large" placeholder="example@example.com" />
           </div>
