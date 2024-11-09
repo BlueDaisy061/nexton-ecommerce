@@ -5,10 +5,18 @@ import React, { useState } from 'react';
 export const ProductContext = React.createContext<{
   listOfCheckoutProducts: any[];
   addProductToCart: (product: any) => void;
-}>({ listOfCheckoutProducts: [], addProductToCart: (product) => {} });
+  isLoggedIn: boolean;
+  loggedInHandler: () => void;
+}>({
+  listOfCheckoutProducts: [],
+  addProductToCart: (product) => {},
+  isLoggedIn: false,
+  loggedInHandler: () => {},
+});
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [listOfCheckoutProducts, setListOfCheckoutProducts] = useState<any>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const addProductToCart = (product: any) => {
     let existingProduct;
@@ -25,8 +33,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     listOfCheckoutProducts.push(product);
   };
 
+  const loggedInHandler = () => (isLoggedIn ? setIsLoggedIn(false) : setIsLoggedIn(true));
+
   return (
-    <ProductContext.Provider value={{ listOfCheckoutProducts, addProductToCart }}>
+    <ProductContext.Provider
+      value={{ listOfCheckoutProducts, addProductToCart, isLoggedIn, loggedInHandler }}
+    >
       {children}
     </ProductContext.Provider>
   );

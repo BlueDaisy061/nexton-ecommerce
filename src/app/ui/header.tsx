@@ -4,11 +4,12 @@ import { NavLinks } from './navlinks';
 import { Dropdown, MenuProps, Space } from 'antd';
 import { PrimaryButton, SecondaryButton } from './button';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import React from 'react';
+import { ProductContext } from '../(context)/context';
 
 export const Header = () => {
-  const isLoggedIn = true;
+  const { isLoggedIn, loggedInHandler } = useContext(ProductContext);
   const pathname = usePathname();
   const [menuIsOpen, setMenuIsOpen] = useState<Boolean>(false);
   const listOfProducts = [];
@@ -23,7 +24,11 @@ export const Header = () => {
 
   const items: MenuProps['items'] = [
     {
-      label: <Link href={'/login'}>Logout</Link>,
+      label: (
+        <Link href={'/login'} onClick={loggedInHandler}>
+          Logout
+        </Link>
+      ),
       key: '0',
     },
   ];
@@ -78,13 +83,17 @@ export const Header = () => {
             </Link>
           </div>
         ) : (
-          <div className="hidden md:w-[190px] md:flex md:justify-between">
-            <PrimaryButton title="Sign up" />
-            <SecondaryButton title="Log in" />
+          <div className="hidden md:w-[190px] md:flex md:justify-end md:self-center md:gap-3 md:h-8 lg:w-[250px] lg:h-12 lg:gap-4">
+            <Link href={'/register'}>
+              <PrimaryButton title="Sign up" style="md:text-xs md:px-3 lg:py-[10px] lg:text-sm" />
+            </Link>
+            <Link href={'/login'}>
+              <SecondaryButton title="Log in" style="md:text-xs md:px-3 lg:px-7 lg:text-sm" />
+            </Link>
           </div>
         )}
         {menuIsOpen ? (
-          <button className="py-1 md:hidden " onClick={closeMenu}>
+          <button className="py-1 md:hidden" onClick={closeMenu}>
             <Image
               src="/close-icon.svg"
               alt="close-icon"
@@ -118,7 +127,7 @@ export const Header = () => {
                   </Link>
                 </li>
                 <li className={pathname === '/login' ? 'font-semibold' : ''}>
-                  <Link className="px-4" href={'/login'}>
+                  <Link className="px-4" href={'/login'} onClick={loggedInHandler}>
                     Log out
                   </Link>
                 </li>
