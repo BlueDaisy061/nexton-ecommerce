@@ -43,7 +43,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => setAllProducts(data));
   });
 
   const loggedInHandler = () => (isLoggedIn ? setIsLoggedIn(false) : setIsLoggedIn(true));

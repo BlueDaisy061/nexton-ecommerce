@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
+const Product = require('./models/Product');
+const Users = require('./models/Users');
 
 const port = 4000;
 const app = express();
@@ -23,63 +25,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-// Models
-
-const Product = mongoose.model('Product', {
-  id: {
-    type: Number,
-    required: true,
-  },
-  productName: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  productCategory: {
-    type: String,
-    required: true,
-  },
-  salePrice: {
-    type: Number,
-    required: false,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  available: {
-    type: Boolean,
-    default: true,
-  },
-});
-
-const Users = mongoose.model('Users', {
-  name: {
-    type: String,
-  },
-  email: {
-    type: String,
-    unique: true,
-  },
-  password: {
-    type: String,
-  },
-  cartData: {
-    type: Object,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
 
 // App endpoints for products
 

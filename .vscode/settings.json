@@ -2,5 +2,6 @@
   "files.autoSave": "afterDelay",
   "editor.formatOnSave": true,
   "prettier.semi": true,
-  "cSpell.words": ["daisyui", "nexton"]
+  "cSpell.words": ["daisyui", "nexton"],
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "always" },
 }
