@@ -1,22 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const ProductContext = React.createContext<{
   listOfCheckoutProducts: any[];
   addProductToCart: (product: any) => void;
   isLoggedIn: boolean;
   loggedInHandler: () => void;
+  allProducts: any[];
 }>({
   listOfCheckoutProducts: [],
   addProductToCart: (product) => {},
   isLoggedIn: false,
   loggedInHandler: () => {},
+  allProducts: [],
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [listOfCheckoutProducts, setListOfCheckoutProducts] = useState<any>([]);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [allProducts, setAllProducts] = useState([]);
 
   const addProductToCart = (product: any) => {
     let existingProduct;
@@ -33,11 +36,21 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     listOfCheckoutProducts.push(product);
   };
 
+  useEffect(() => {
+    fetch('http://localhost:4000/all-products', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  });
+
   const loggedInHandler = () => (isLoggedIn ? setIsLoggedIn(false) : setIsLoggedIn(true));
 
   return (
     <ProductContext.Provider
-      value={{ listOfCheckoutProducts, addProductToCart, isLoggedIn, loggedInHandler }}
+      value={{ listOfCheckoutProducts, addProductToCart, isLoggedIn, loggedInHandler, allProducts }}
     >
       {children}
     </ProductContext.Provider>
