@@ -52,7 +52,7 @@ function ListProduct() {
   const [loading, setLoading] = useState(false);
 
   const fetchProductList = async () => {
-    await fetch('http://localhost:4000/all-products')
+    await fetch('http://localhost:4000/product/all-products')
       .then((res) => res.json())
       .then((data) =>
         setAllProducts(
@@ -72,7 +72,7 @@ function ListProduct() {
 
   const deleteSelectedProductsHandler = async () => {
     setLoading(true);
-    await fetch('http://localhost:4000/remove-products', {
+    await fetch('http://localhost:4000/product/remove-products', {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
