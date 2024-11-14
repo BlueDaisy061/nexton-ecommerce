@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import { CarouselWrapper } from './ui/carousel';
@@ -9,10 +11,13 @@ import { CollectionCard } from './ui/collection-card';
 import { ProductItem } from './ui/product-item';
 import { Carousel } from 'antd';
 import { PrimaryButton } from './ui/button';
-import { RecommendedProducts } from './ui/recommended-products';
+import { ProductListCarousel } from './ui/product-list-carousel';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { ProductContext } from './(context)/context';
 
 export default function Home() {
+  const { allProducts } = useContext(ProductContext);
   return (
     <div className="pt-[4.5rem]">
       <div className="w-full h-auto bg-banner-gray md:flex md:justify-between md:items-center">
@@ -71,7 +76,7 @@ export default function Home() {
           </h2>
         </div>
         <div>
-          <RecommendedProducts />
+          <ProductListCarousel products={products} />
         </div>
       </div>
       {/* Best sellers section */}

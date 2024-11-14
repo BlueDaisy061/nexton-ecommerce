@@ -37,17 +37,17 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:4000/all-products', {
+    fetch('http://localhost:4000/product/all-products', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
-      .then((data) => setAllProducts(data));
-  });
+      .then((data) => console.log(data));
+  }, []);
 
+  console.log(allProducts);
   const loggedInHandler = () => (isLoggedIn ? setIsLoggedIn(false) : setIsLoggedIn(true));
 
   return (
