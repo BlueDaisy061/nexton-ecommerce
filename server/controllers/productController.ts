@@ -23,6 +23,7 @@ const addNewProduct = async (req: any, res: any, next: any) => {
     productCategory: req.body.productCategory,
     salePrice: req.body.salePrice,
     price: req.body.price,
+    isDiscount: !!req.body.salePrice,
   });
   console.log(product);
   await product.save();

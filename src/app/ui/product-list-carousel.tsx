@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ProductItem } from './product-item';
 import { ProductBasicType } from '../(types)/product';
 
-export const ProductListCarousel = (products: ProductBasicType[]) => {
+export const ProductListCarousel = ({ products }: { products: ProductBasicType[] }) => {
   return (
     <Carousel autoplay {...carouselSettings} className="flex justify-between gap-5">
       {products.map((product, key) => (

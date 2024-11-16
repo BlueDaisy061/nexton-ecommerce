@@ -9,6 +9,6 @@ export type ProductBasicType = {
   productCategory: ProductCategory;
   price: number;
   salePrice?: number;
-  rate: number;
-  numberOfFeedbacks: number;
+  rate?: number;
+  numberOfFeedbacks?: number;
 };

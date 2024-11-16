@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { ProductBasicType } from '../(types)/product';
 
 export const ProductContext = React.createContext<{
   listOfCheckoutProducts: any[];
   addProductToCart: (product: any) => void;
   isLoggedIn: boolean;
   loggedInHandler: () => void;
-  allProducts: any[];
+  allProducts: ProductBasicType[];
 }>({
   listOfCheckoutProducts: [],
   addProductToCart: (product) => {},
@@ -44,7 +45,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setAllProducts(data));
   }, []);
 
   console.log(allProducts);

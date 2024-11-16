@@ -18,6 +18,7 @@ import { ProductContext } from './(context)/context';
 
 export default function Home() {
   const { allProducts } = useContext(ProductContext);
+
   return (
     <div className="pt-[4.5rem]">
       <div className="w-full h-auto bg-banner-gray md:flex md:justify-between md:items-center">
@@ -76,7 +77,7 @@ export default function Home() {
           </h2>
         </div>
         <div>
-          <ProductListCarousel products={products} />
+          <ProductListCarousel products={allProducts} />
         </div>
       </div>
       {/* Best sellers section */}
@@ -87,7 +88,7 @@ export default function Home() {
         </div>
         <div>
           <Carousel autoplay {...carouselSettings}>
-            {products.map((product, key) => (
+            {allProducts.map((product, key) => (
               <Link href={`/product/${product.id}`} key={key} className="px-2">
                 <ProductItem product={product} />
               </Link>
