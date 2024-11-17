@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   productName: {
     type: String,
     required: true,
@@ -42,6 +38,34 @@ const productSchema = new Schema({
   numberOfFeedbacks: {
     type: Number,
     default: 0,
+  },
+  availableSizes: {
+    type: Array<String>,
+    require: true,
+  },
+  tax: {
+    type: Number,
+    required: true,
+  },
+  productOverview: {
+    type: String,
+    required: true,
+  },
+  material: {
+    type: String,
+    required: false,
+  },
+  color: {
+    type: Array<String>,
+    required: true,
+  },
+  salesCount: {
+    type: Number,
+    default: 0,
+  },
+  keywords: {
+    type: Array<String>,
+    required: true,
   },
   date: {
     type: Date,

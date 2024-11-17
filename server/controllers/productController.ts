@@ -6,24 +6,79 @@ const getAllProducts = async (req: any, res: any, next: any) => {
   res.send(products);
 };
 
-const addNewProduct = async (req: any, res: any, next: any) => {
-  let products = await Product.find({});
-  let id;
-  if (products.length > 0) {
-    let lastProductArray = products.slice(-1);
-    let lastProduct = lastProductArray[0];
-    id = lastProduct.id + 1;
+const getProductById = async (req: any, res: any, next: any) => {
+  const productId = req.params.pid;
+  let product = await Product.findById(productId);
+
+  const { productName, image, productCategory, salePrice, price } = product;
+
+  if (product) {
+    res.send({
+      productName,
+      image,
+      productCategory,
+      salePrice,
+      price,
+      isDiscount: !!product.salePrice,
+    });
   } else {
-    id = 1;
+    res.status(404).json({
+      success: false,
+      error: '404 - Product not found',
+    });
   }
+};
+
+const getProductDetailById = async (req: any, res: any, next: any) => {
+  let productId = req.params.pid;
+  let productDetail = await Product.findById(productId);
+
+  const {
+    availableSizes,
+    tax,
+    productOverview,
+    material,
+    color,
+    salesCount,
+    keywords,
+    date,
+    available,
+  } = productDetail;
+
+  if (productDetail) {
+    res.send({
+      availableSizes,
+      tax,
+      productOverview,
+      material,
+      color,
+      salesCount,
+      keywords,
+      date,
+      available,
+    });
+  } else {
+    res.status(404).json({
+      success: false,
+      error: '404 - Product not found',
+    });
+  }
+};
+
+const addNewProduct = async (req: any, res: any, next: any) => {
   const product = new Product({
-    id: id,
     productName: req.body.productName,
     image: req.body.image,
     productCategory: req.body.productCategory,
     salePrice: req.body.salePrice,
     price: req.body.price,
     isDiscount: !!req.body.salePrice,
+    availableSizes: req.body.availableSizes,
+    tax: req.body.tax,
+    productOverview: req.body.productOverview,
+    material: req.body.material,
+    color: req.body.color,
+    keywords: req.body.keywords,
   });
   console.log(product);
   await product.save();
@@ -55,3 +110,5 @@ exports.getAllProducts = getAllProducts;
 exports.addNewProduct = addNewProduct;
 exports.removeProducts = removeProducts;
 exports.updateProduct = updateProduct;
+exports.getProductById = getProductById;
+exports.getProductDetailById = getProductDetailById;

@@ -1,7 +1,7 @@
 import { ProductCategory } from './enum';
 
 export type ProductBasicType = {
-  id: string;
+  _id: string;
   image: string;
   isDiscount: boolean;
   percentDiscount?: number;
@@ -11,4 +11,15 @@ export type ProductBasicType = {
   salePrice?: number;
   rate?: number;
   numberOfFeedbacks?: number;
+};
+
+export type ProductDetailType = {
+  _id: string;
+  availableSizes: string[];
+  tax: number;
+  productOverview: string;
+  material?: string;
+  color: string[];
+  salesCount: number;
+  keywords: string[];
 };
