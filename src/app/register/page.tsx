@@ -26,7 +26,7 @@ export default function RegisterPage() {
 
   const onFinish: FormProps<UserRegisterInfo>['onFinish'] = async (values) => {
     const { username, email, password } = values;
-    await fetch('http://localhost:4000/signup', {
+    await fetch('http://localhost:4000/user/signup', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

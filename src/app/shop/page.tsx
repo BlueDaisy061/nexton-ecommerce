@@ -7,6 +7,8 @@ import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { products } from '../lib/products';
 import { ProductItem } from '../ui/product-item';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { ProductContext } from '../(context)/context';
 
 const filterItems: MenuProps['items'] = [
   {
@@ -53,6 +55,8 @@ const rowsPerPageItems: MenuProps['items'] = [
 ];
 
 export default function ShopPage() {
+  const { allProducts } = useContext(ProductContext);
+
   return (
     <div className="pt-[4.5rem] mt-10 md:mx-[3.5rem] md:mb-20 lg:mx-[4.5rem] lg:flex">
       <div className="hidden lg:flex lg:flex-none">
@@ -90,8 +94,8 @@ export default function ShopPage() {
       </div>
       <div className="w-full">
         <div className="mx-6 gap-x-5 gap-y-8 grid grid-cols-autoFill lg:grow">
-          {products.map((product, key) => (
-            <Link href={`/product/${product.id}`} key={key} className="mb-8 lg:mb-0">
+          {allProducts.map((product, key) => (
+            <Link href={`/product/${product._id}`} key={key} className="mb-8 lg:mb-0">
               <ProductItem product={product} />
             </Link>
           ))}

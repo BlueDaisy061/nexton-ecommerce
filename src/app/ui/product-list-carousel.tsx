@@ -1,11 +1,11 @@
 import { Carousel } from 'antd';
-import { carouselSettings, products } from '../lib';
-import React, { useContext } from 'react';
+import { carouselSettings } from '../lib';
+import React from 'react';
 import Link from 'next/link';
 import { ProductItem } from './product-item';
 import { ProductBasicType } from '../(types)/product';
 
-export const RecommendedProducts = ({ products }: { products: ProductBasicType[] }) => {
+export const ProductListCarousel = ({ products }: { products: ProductBasicType[] }) => {
   return (
     <Carousel autoplay {...carouselSettings} className="flex justify-between gap-5">
       {products.map((product, key) => (

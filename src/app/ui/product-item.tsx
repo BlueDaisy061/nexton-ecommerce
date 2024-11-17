@@ -1,27 +1,17 @@
 import Image from 'next/image';
 import { PercentBadgeIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/solid';
-
-export type ProductInfo = {
-  image: string;
-  isDiscount: boolean;
-  percentDiscount?: number;
-  productName: string;
-  productCategory: string;
-  price: number;
-  salePrice?: number;
-  rate: number;
-  numberOfFeedbacks: number;
-};
+import { ProductBasicType } from '../(types)/product';
+import { path } from '../lib/enum';
 
 export const ProductItem = ({
   product,
   showDetail = true,
 }: {
-  product: ProductInfo;
+  product: ProductBasicType;
   showDetail?: boolean;
 }) => {
-  const {
+  let {
     image,
     isDiscount,
     percentDiscount,
@@ -32,6 +22,10 @@ export const ProductItem = ({
     rate,
     numberOfFeedbacks,
   } = product;
+
+  // if (image.startsWith(path.serverPath)) {
+  //   image = image.replace(path.serverPath, '');
+  // }
 
   return (
     <>

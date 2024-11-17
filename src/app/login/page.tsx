@@ -26,7 +26,7 @@ export default function LoginPage() {
   };
 
   const onFinish: FormProps<UserLogInInfo>['onFinish'] = async (values) => {
-    await fetch('http://localhost:4000/login', {
+    await fetch('http://localhost:4000/user/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

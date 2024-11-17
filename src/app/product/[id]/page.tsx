@@ -5,18 +5,19 @@ import { products } from '@/app/lib/products';
 import { PrimaryButton } from '@/app/ui/button';
 import { ProductItem } from '@/app/ui/product-item';
 import { QuantityPicker } from '@/app/ui/quantityPicker';
-import { RecommendedProducts } from '@/app/ui/recommended-products';
 import { StarIcon } from '@heroicons/react/16/solid';
 import { ShoppingBagIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
+import { RecommendedProducts } from '@/app/ui/recommended-products';
 
 export default function ProductPage() {
-  const { listOfCheckoutProducts, addProductToCart } = React.useContext(ProductContext);
+  const { listOfCheckoutProducts, addProductToCart, allProducts } =
+    React.useContext(ProductContext);
   const pathname = usePathname();
   const productId = pathname.split('/')[2];
-  const product = products.find((product) => product.id === productId);
+  const product = allProducts.find((product) => product.id === productId);
   if (!product) {
     throw new Error('404 - No product found.');
   }
@@ -199,7 +200,7 @@ export default function ProductPage() {
       {/* Recommended products */}
       <div className="my-16 lg:my-24">
         <h2 className="mb-6 lg:mb-10">Recommendations</h2>
-        <RecommendedProducts />
+        <RecommendedProducts products={allProducts} />
       </div>
     </div>
   );
