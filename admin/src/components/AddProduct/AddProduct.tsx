@@ -1,6 +1,8 @@
 import { Button, Input, Select } from 'antd';
 import React, { useState } from 'react';
-import { ArrowUpTrayIcon } from '@heroicons/react/24/outline';
+import { PlusOutlined } from '@ant-design/icons';
+import { Image, Upload } from 'antd';
+import type { GetProp, UploadFile, UploadProps } from 'antd';
 
 const categories = [
   {
@@ -34,18 +36,16 @@ const categories = [
 ];
 
 function AddProduct() {
-  const [image, setImage] = useState('');
   const [productDetails, setProductDetails] = useState({
     productName: '',
     price: '',
     salePrice: '',
     productCategory: '',
-    image: '',
+    images: [],
   });
-
-  const imageHandler = (e: any) => {
-    setImage(e.target.files[0]);
-  };
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState('');
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const changeHandler = (e: any) => {
     setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
@@ -55,12 +55,28 @@ function AddProduct() {
     setProductDetails({ ...productDetails, productCategory: value });
   };
 
+  const handlePreview = async (file: UploadFile) => {
+    setPreviewImage(file.url || (file.preview as string));
+    setPreviewOpen(true);
+  };
+
+  const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) =>
+    setFileList(newFileList);
+
+  const uploadButton = (
+    <button className="bg-none border-0" type="button">
+      <PlusOutlined />
+      <div className="mt-2">Upload</div>
+    </button>
+  );
+
   const addProduct = async () => {
+    console.log(URL.createObjectURL(fileList[0] as unknown as Blob));
     let responseData = { success: 0, image_url: '' };
     const product = productDetails;
 
     const formData = new FormData();
-    formData.append('product', image);
+    // formData.append('product', fileList);
 
     await fetch('http://localhost:4000/upload', {
       method: 'POST',
@@ -73,7 +89,7 @@ function AddProduct() {
       .then((data) => (responseData = data));
 
     if (responseData.success) {
-      product.image = responseData.image_url;
+      // product.images = responseData.image_url;
       await fetch('http://localhost:4000/product/add-product', {
         method: 'POST',
         headers: {
@@ -91,15 +107,14 @@ function AddProduct() {
           }
         });
     }
-    console.log(product);
     setProductDetails({
       productName: '',
       price: '',
       salePrice: '',
       productCategory: '',
-      image: '',
+      images: [],
     });
-    setImage('');
+    setFileList([]);
   };
 
   return (
@@ -150,7 +165,7 @@ function AddProduct() {
           onChange={productCategoryChangeHandler}
         />
       </div>
-      <div>
+      {/* <div>
         <label htmlFor="file-input">
           {image ? (
             <img
@@ -166,7 +181,28 @@ function AddProduct() {
           )}
         </label>
         <Input type="file" onChange={(e) => imageHandler(e)} name="image" id="file-input" hidden />
-      </div>
+      </div> */}
+      <Upload
+        listType="picture-card"
+        fileList={fileList}
+        accept={'image/png, mage/jpeg'}
+        beforeUpload={() => false}
+        onPreview={handlePreview}
+        onChange={(fileList) => handleChange(fileList)}
+      >
+        {fileList.length >= 4 ? null : uploadButton}
+      </Upload>
+      {previewImage && (
+        <Image
+          wrapperStyle={{ display: 'none' }}
+          preview={{
+            visible: previewOpen,
+            onVisibleChange: (visible) => setPreviewOpen(visible),
+            afterOpenChange: (visible) => !visible && setPreviewImage(''),
+          }}
+          src={previewImage}
+        />
+      )}
       <Button
         type="primary"
         shape="round"

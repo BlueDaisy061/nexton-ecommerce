@@ -11,7 +11,7 @@ function SideBar() {
           <p>Add Product</p>
         </div>
       </Link>
-      <Link to={'/list-products'} className="no-underline w-[50vw] lg:w-auto">
+      <Link to={'/'} className="no-underline w-[50vw] lg:w-auto">
         <div className="flex items-center justify-center gap-4 py-7 px-6 border-b-[1px] border-l-[1px] border-border lg:justify-start">
           <BuildingStorefrontIcon className="w-5 h-5" />
           <p>Product List</p>
