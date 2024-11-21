@@ -2,50 +2,39 @@ import { Button, Input, Select } from 'antd';
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
-import type { GetProp, UploadFile, UploadProps } from 'antd';
+import type { UploadFile, UploadProps } from 'antd';
+import { ProductCategory, ProductInfo, productSizes } from '../../types';
+import TextArea from 'antd/es/input/TextArea';
 
-const categories = [
-  {
-    value: "Men's fashion",
-    label: "Men's fashion",
-  },
-  {
-    value: "Women's fashion",
-    label: "Women's fashion",
-  },
-  {
-    value: 'Kids & Toys',
-    label: 'Kids & Toys',
-  },
-  {
-    value: 'Accessories',
-    label: 'Accessories',
-  },
-  {
-    value: 'Cosmetics',
-    label: 'Cosmetics',
-  },
-  {
-    value: 'Shoes',
-    label: 'Shoes',
-  },
-  {
-    value: 'Sports',
-    label: 'Sports',
-  },
-];
+const categories = Object.values(ProductCategory).map((val) => {
+  return {
+    value: val,
+    label: val,
+  };
+});
+
+const initProductInfo: ProductInfo = {
+  productName: '',
+  price: 0,
+  salePrice: 0,
+  productCategory: '',
+  images: [],
+  availableSizes: [],
+  tax: 0,
+  productOverview: '',
+  material: '',
+  color: [],
+  salesCount: 0,
+  keywords: [],
+};
 
 function AddProduct() {
-  const [productDetails, setProductDetails] = useState({
-    productName: '',
-    price: '',
-    salePrice: '',
-    productCategory: '',
-    images: [],
-  });
+  const [productDetails, setProductDetails] = useState<ProductInfo>(initProductInfo);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [availableSizes, setAvailableSizes] = useState<string[]>([]);
+  const filteredSizes = productSizes.filter((size) => !availableSizes.includes(size));
 
   const changeHandler = (e: any) => {
     setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
@@ -71,7 +60,7 @@ function AddProduct() {
   );
 
   const addProduct = async () => {
-    console.log(URL.createObjectURL(fileList[0] as unknown as Blob));
+    // console.log(URL.createObjectURL(fileList[0] as unknown as Blob));
     let responseData = { success: 0, image_url: '' };
     const product = productDetails;
 
@@ -107,18 +96,12 @@ function AddProduct() {
           }
         });
     }
-    setProductDetails({
-      productName: '',
-      price: '',
-      salePrice: '',
-      productCategory: '',
-      images: [],
-    });
+    setProductDetails(initProductInfo);
     setFileList([]);
   };
 
   return (
-    <div className="box-border w-full h-min-[100vh] flex flex-col gap-6 px-8 py-8 rounded-sm bg-default lg:px-14 lg:py-8 lg:mx-8 lg:my-5 lg:max-w-[50%]">
+    <div className="w-full flex flex-col gap-6 px-8 py-8 rounded-sm bg-default lg:px-14 lg:py-8 lg:mx-8 lg:my-5 lg:max-w-[50%]">
       <div>
         <h5 className="mb-2">Product title</h5>
         <Input
@@ -182,6 +165,63 @@ function AddProduct() {
         </label>
         <Input type="file" onChange={(e) => imageHandler(e)} name="image" id="file-input" hidden />
       </div> */}
+      <div>
+        <h5 className="mb-2">Available Sizes</h5>
+        <Select
+          mode="multiple"
+          placeholder="Select available size for product"
+          value={availableSizes}
+          onChange={setAvailableSizes}
+          options={filteredSizes.map((size) => ({
+            value: size,
+            label: size,
+          }))}
+          size="large"
+          className="w-full"
+        />
+      </div>
+      <div className="flex justify-between gap-10">
+        <div className="w-full">
+          <h5 className="mb-2">Tax</h5>
+          <Input
+            size="large"
+            name="tax"
+            value={productDetails.tax}
+            onChange={(e) => changeHandler(e)}
+          />
+        </div>
+        <div className="w-full">
+          <h5 className="mb-2">Sales count</h5>
+          <Input
+            size="large"
+            name="salesCount"
+            value={productDetails.salesCount}
+            onChange={(e) => changeHandler(e)}
+          />
+        </div>
+      </div>
+      <div>
+        <h5 className="mb-2">Product overview</h5>
+        <TextArea
+          rows={5}
+          value={productDetails.productOverview}
+          onChange={(e) => changeHandler(e)}
+          placeholder="Short describe product..."
+          name="productOverview"
+          maxLength={300}
+        />
+      </div>
+      <div>
+        <h5 className="mb-2">Material</h5>
+        <Input
+          size="large"
+          value={productDetails.material}
+          onChange={(e) => changeHandler(e)}
+          placeholder="Material..."
+          name="material"
+        />
+      </div>
+
       <Upload
         listType="picture-card"
         fileList={fileList}
@@ -203,6 +243,7 @@ function AddProduct() {
           src={previewImage}
         />
       )}
+
       <Button
         type="primary"
         shape="round"
