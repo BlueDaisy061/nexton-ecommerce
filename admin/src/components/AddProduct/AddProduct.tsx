@@ -1,9 +1,9 @@
-import { Button, Input, Select } from 'antd';
+import { Button, Input, Select, Tag } from 'antd';
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Image, Upload } from 'antd';
-import type { UploadFile, UploadProps } from 'antd';
-import { ProductCategory, ProductInfo, productSizes } from '../../types';
+import type { SelectProps, UploadFile, UploadProps } from 'antd';
+import { ProductCategory, ProductInfo, productSizes, ProductColors } from '../../types';
 import TextArea from 'antd/es/input/TextArea';
 
 const categories = Object.values(ProductCategory).map((val) => {
@@ -28,13 +28,40 @@ const initProductInfo: ProductInfo = {
   keywords: [],
 };
 
+type ColorTagRender = SelectProps['tagRender'];
+
+const colorOptions: SelectProps['options'] = Object.values(ProductColors).map((val) => {
+  return { value: val };
+});
+
 function AddProduct() {
   const [productDetails, setProductDetails] = useState<ProductInfo>(initProductInfo);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [availableSizes, setAvailableSizes] = useState<string[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
   const filteredSizes = productSizes.filter((size) => !availableSizes.includes(size));
+
+  const colorTagRender: ColorTagRender = (props) => {
+    const { label, value, closable, onClose } = props;
+    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+    return (
+      <Tag
+        color={value}
+        onMouseDown={onPreventMouseDown}
+        closable={closable}
+        onClose={onClose}
+        className="mr-2"
+      >
+        {label}
+      </Tag>
+    );
+  };
 
   const changeHandler = (e: any) => {
     setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
@@ -42,6 +69,11 @@ function AddProduct() {
 
   const productCategoryChangeHandler = (value: string) => {
     setProductDetails({ ...productDetails, productCategory: value });
+  };
+
+  const handleKeywordsList = (e: any) => {
+    const keywordsList = e.target.value.split(', ');
+    setKeywords(keywordsList);
   };
 
   const handlePreview = async (file: UploadFile) => {
@@ -148,23 +180,6 @@ function AddProduct() {
           onChange={productCategoryChangeHandler}
         />
       </div>
-      {/* <div>
-        <label htmlFor="file-input">
-          {image ? (
-            <img
-              src={URL.createObjectURL(image as unknown as Blob)}
-              alt="product-image"
-              className="w-36"
-            />
-          ) : (
-            <div className="py-20 px-7 flex flex-col bg-default border-[1px] border-dashed border-border">
-              <p className="self-center">Upload product image</p>
-              <ArrowUpTrayIcon className="w-6 mt-4 self-center" />
-            </div>
-          )}
-        </label>
-        <Input type="file" onChange={(e) => imageHandler(e)} name="image" id="file-input" hidden />
-      </div> */}
       <div>
         <h5 className="mb-2">Available Sizes</h5>
         <Select
@@ -219,6 +234,27 @@ function AddProduct() {
           onChange={(e) => changeHandler(e)}
           placeholder="Material..."
           name="material"
+        />
+      </div>
+      <div>
+        <h5 className="mb-2">Colors</h5>
+        <Select
+          mode="multiple"
+          tagRender={colorTagRender}
+          defaultValue={[]}
+          className="w-full"
+          options={colorOptions}
+          onChange={setColors}
+        />
+      </div>
+      <div>
+        <h5>Keywords</h5>
+        <p className="mb-2">Separating by comma and a space (e.g. active, stretchable)</p>
+        <Input
+          size="large"
+          onChange={handleKeywordsList}
+          placeholder="Some keywords..."
+          name="keywords"
         />
       </div>
 

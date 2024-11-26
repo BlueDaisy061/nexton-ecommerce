@@ -17,3 +17,16 @@ export enum ProductSizes {
   XXL = '2XL',
   XXXL = '3XL',
 }
+
+export enum ProductColors {
+  RED = 'Red',
+  BLUE = 'Blue',
+  YELLOW = 'Yellow',
+  GREEN = 'Green',
+  PURPLE = 'Purple',
+  ORANGE = 'Orange',
+  PINK = 'Pink',
+  BLACK = 'Black',
+  WHITE = 'White',
+  GRAY = 'Gray',
+}
