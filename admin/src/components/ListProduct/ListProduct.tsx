@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ProductDetail } from '../../types/ProductDetail';
+import { ProductBasic } from '../../types';
 import { Button, Flex, Table, TableProps } from 'antd';
 import { PencilSquareIcon } from '@heroicons/react/24/outline';
 
 type TableRowSelection<T extends object = object> = TableProps<T>['rowSelection'];
 
-type ProductDetailDataType = ProductDetail & {
+type ProductBasicDataType = ProductBasic & {
   key: React.Key;
 };
 
-const columns: TableProps<ProductDetailDataType>['columns'] = [
+const columns: TableProps<ProductBasicDataType>['columns'] = [
   {
     title: 'Product name',
     dataIndex: 'productName',
@@ -56,7 +56,7 @@ function ListProduct() {
       .then((res) => res.json())
       .then((data) =>
         setAllProducts(
-          data.map((p: ProductDetail, i: any) => {
+          data.map((p: ProductBasic, i: any) => {
             return {
               ...p,
               key: i,
@@ -89,12 +89,12 @@ function ListProduct() {
     setSelectedRowKeys(newSelectedRowKeys);
     setSelectedProducts(
       allProducts
-        .filter((product: ProductDetailDataType) => newSelectedRowKeys.includes(product.key))
-        .map((p: ProductDetailDataType) => p.id)
+        .filter((product: ProductBasicDataType) => newSelectedRowKeys.includes(product.key))
+        .map((p: ProductBasicDataType) => p._id)
     );
   };
 
-  const rowSelection: TableRowSelection<ProductDetailDataType> = {
+  const rowSelection: TableRowSelection<ProductBasicDataType> = {
     selectedRowKeys,
     onChange: (selectedRowKey) => onSelectChange(selectedRowKey),
   };
@@ -117,7 +117,7 @@ function ListProduct() {
             </Button>
             <p>{hasSelected ? `Selected ${selectedRowKeys.length} items` : null}</p>
           </Flex>
-          <Table<ProductDetailDataType>
+          <Table<ProductBasicDataType>
             rowSelection={rowSelection}
             columns={columns}
             dataSource={allProducts}

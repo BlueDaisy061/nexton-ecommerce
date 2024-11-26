@@ -6,11 +6,11 @@ import ListProduct from '../../components/ListProduct/ListProduct';
 
 function Admin() {
   return (
-    <div className="flex flex-col lg:flex-row h-[100vh]">
+    <div className="flex flex-col lg:flex-row h-auto">
       <SideBar />
       <Routes>
         <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/list-products" element={<ListProduct />} />
+        <Route path="/" element={<ListProduct />} />
       </Routes>
     </div>
   );
